@@ -1,0 +1,1 @@
+export const boxShadow = 'rgba(0, 0, 0, 0.4) 0px 0px 10px';
