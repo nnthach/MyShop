@@ -2,8 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --background-lightgrey: #fbfbfb;
+}
+
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+@layer utilities {
+    .two-line-heading {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
 }

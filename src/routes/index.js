@@ -7,7 +7,7 @@ const publicRoutes = [
         component: Home,
     },
     {
-        path: '/products/:category',
+        path: '/products/:category/*',
         component: Product,
     },
 ];

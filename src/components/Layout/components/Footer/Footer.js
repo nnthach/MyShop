@@ -1,5 +1,5 @@
 function Footer() {
-    return <h2>Footer</h2>;
+    return <div className="bg-black text-white">Footer</div>;
 }
 
 export default Footer;
