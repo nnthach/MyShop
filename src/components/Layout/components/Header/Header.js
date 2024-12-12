@@ -31,7 +31,7 @@ function Header() {
             <div
                 className="fixed top-0 left-0 right-0 z-[2]
                 flex items-center justify-between h-[80px]  
-            bg-white border-b-[1px] border-black text-black
+            bg-white border-b-[1px] border-gray-200 text-black
             px-2 sm:px-10"
             >
                 {/*Menu Icon */}

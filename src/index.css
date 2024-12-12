@@ -19,4 +19,22 @@ body {
         -webkit-line-clamp: 2;
         overflow: hidden;
     }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 2px;
+        height: 8px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgb(233, 233, 233);
+        border-radius: 10px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: lightgray;
+    }
 }

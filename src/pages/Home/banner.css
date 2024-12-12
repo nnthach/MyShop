@@ -2,13 +2,24 @@
     @apply bg-white opacity-35 cursor-pointer w-[40px] h-[40px] sm:w-[60px] sm:h-[60px] p-2 active:opacity-100 sm:hover:opacity-100;
 }
 
-
-
 @media (max-width: 640px) {
     .banner {
         height: 80vh;
     }
     .banner-images {
         height: 80vh;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: transparent;
+        border-radius: 10px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: transparent;
     }
 }
