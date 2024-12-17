@@ -18,6 +18,7 @@ function MenuItem({ openMenu, handleOpenMenu }) {
         {
             title: 'TOP',
             children: [
+                { title: 'ALL', to: '/products/top/all' },
                 { title: 'T-SHIRT', to: '/products/top/tshirt' },
                 { title: 'SHIRT', to: '/products/top/shirt' },
                 { title: 'SWEATER', to: '/products/top/sweater' },
@@ -26,6 +27,7 @@ function MenuItem({ openMenu, handleOpenMenu }) {
         {
             title: 'BOTTOM',
             children: [
+                { title: 'ALL', to: '/products/bottom/all' },
                 { title: 'PANTS', to: '/products/bottom/pants' },
                 { title: 'SHORT', to: '/products/bottom/short' },
             ],
@@ -33,8 +35,9 @@ function MenuItem({ openMenu, handleOpenMenu }) {
         {
             title: 'OUTERWEAR',
             children: [
-                { title: 'JACKET', to: '/products/bottom/jacket' },
-                { title: 'HOODIES', to: '/products/bottom/hoodies' },
+                { title: 'ALL', to: '/products/outerwear/all' },
+                { title: 'JACKET', to: '/products/outerwear/jacket' },
+                { title: 'HOODIES', to: '/products/outerwear/hoodies' },
             ],
         },
         {
@@ -46,6 +49,10 @@ function MenuItem({ openMenu, handleOpenMenu }) {
     const handleOpenChild = (index) => {
         setOpenChild((prev) => (prev === index ? null : index));
     };
+
+    useEffect(() => {
+        setOpenChild(null);
+    }, [handleOpenMenu]);
 
     return (
         <div

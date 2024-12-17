@@ -65,7 +65,7 @@ function Account() {
                 placement="bottom"
                 render={(attrs) => (
                     <div
-                        className="bg-white w-[400px] p-4 shadow-lg sm:mr-[100px] mt-2"
+                        className="bg-white w-[100%] sm:w-[400px] rounded-lg p-4 shadow-lg sm:mr-[100px] mt-2"
                         style={{ boxShadow: boxShadow }}
                         tabIndex="-1"
                         {...attrs}

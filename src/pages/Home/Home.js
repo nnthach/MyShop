@@ -1,5 +1,5 @@
-import IMAGES from '../../assets/img';
-import './banner.css';
+import { IMAGES } from '../../assets/img';
+import './home.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -171,7 +171,7 @@ function Home() {
                         {newArrivalData.map((item, index) => (
                             <Link to={`/products/${item.category}/search?name${item.name}`}>
                                 <div key={index} className="bg-white cursor-pointer hover:scale-105">
-                                    <img src={IMAGES.pants} alt="item" className="" />
+                                    <img src={IMAGES.pants1_1} alt="item" className="" />
                                     <div className="flex flex-col">
                                         <h5 className="two-line-heading p-2 h-[64px]">{item.name}</h5>
                                         <p className="font-semibold mt-auto">{item.price}&#8363;</p>
