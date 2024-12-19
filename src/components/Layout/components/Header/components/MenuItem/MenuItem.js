@@ -68,10 +68,9 @@ function MenuItem({ openMenu, handleOpenMenu }) {
             />
             <div className="flex flex-col text-[20px] space-y-5">
                 {MENU_LIST.map((item, index) => (
-                    <>
-                        {/*Item */}
+                    <div key={`menu-item-${index}`}>
+                        {/* Item */}
                         <Link
-                            key={index}
                             {...(item.to ? { to: item.to } : {})}
                             onClick={() => {
                                 if (item.children) {
@@ -88,8 +87,8 @@ function MenuItem({ openMenu, handleOpenMenu }) {
                                 {!item.children || item.children.length === 0 ? (
                                     <span
                                         className="absolute
-                                        bg-black h-[1px] w-0 left-0 bottom-0 transition-all duration-500
-                                        group-hover:w-full"
+                            bg-black h-[1px] w-0 left-0 bottom-0 transition-all duration-500
+                            group-hover:w-full"
                                     ></span>
                                 ) : null}
                             </span>
@@ -101,44 +100,38 @@ function MenuItem({ openMenu, handleOpenMenu }) {
                                     ) : (
                                         <AiOutlinePlus
                                             className="opacity-100 scale-100 sm:opacity-0 sm:scale-50 text-[14px] p-[3px] w-[20px] h-[20px] transition-all duration-500
-                                        group-hover:opacity-100 group-hover:scale-100"
+                                group-hover:opacity-100 group-hover:scale-100"
                                         />
                                     )}
                                 </>
                             )}
                         </Link>
 
-                        {/*Sup children */}
+                        {/* Sub-children */}
                         {item.children && item.children.length > 0 && openChild === index && (
                             <div className="!m-0 ml-[40px] text-[16px] flex flex-col">
-                                {item.children.map((child, index) => (
+                                {item.children.map((child, childIndex) => (
                                     <Link
-                                        key={index}
+                                        key={`child-item-${index}-${childIndex}`}
                                         {...(child.to ? { to: child.to } : {})}
                                         className="cursor-pointer p-2 px-4"
                                         onClick={() => {
-                                            if (child.children) {
-                                                handleOpenChild(index); // Open submenu
-                                            } else {
-                                                handleOpenMenu(); // Close menu
-                                            }
+                                            handleOpenMenu(); // Close menu
                                         }}
                                     >
                                         <span className="group relative">
                                             {child.title}
-                                            {!child.children || child.children.length === 0 ? (
-                                                <span
-                                                    className="absolute
-                                                    bg-black h-[1px] w-0 left-0 bottom-0 transition-all duration-500
-                                                    group-hover:w-full"
-                                                ></span>
-                                            ) : null}
+                                            <span
+                                                className="absolute
+                                    bg-black h-[1px] w-0 left-0 bottom-0 transition-all duration-500
+                                    group-hover:w-full"
+                                            ></span>
                                         </span>
                                     </Link>
                                 ))}
                             </div>
                         )}
-                    </>
+                    </div>
                 ))}
             </div>
         </div>

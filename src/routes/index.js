@@ -1,5 +1,6 @@
 import Home from '~/pages/Home/Home';
 import Product from '~/pages/Product/Product';
+import ProductDetail from '~/pages/ProductDetail/ProductDetail';
 
 const publicRoutes = [
     {
@@ -9,6 +10,10 @@ const publicRoutes = [
     {
         path: '/products/:category/*',
         component: Product,
+    },
+    {
+        path: '/product/:productId/:productName',
+        component: ProductDetail,
     },
 ];
 

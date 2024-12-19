@@ -1,12 +1,15 @@
 import { IMAGES, IMAGES_PRODUCT } from '../../assets/img';
 import { TbEaseInOutControlPoints } from 'react-icons/tb';
 import { useEffect, useState } from 'react';
-import Pagination from './Pagination/Pagination';
+import Pagination from './components/Pagination/Pagination';
+import FilterMenu from './components/FilterMenu/FilterMenu';
+import { Link } from 'react-router-dom';
 
 function Product() {
     const [hoverProductID, setHoverProductID] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [isSticky, setIsSticky] = useState(false);
+    const [openFilter, setOpenFilter] = useState(false);
     const productsPerPage = 16;
 
     const productsData = [
@@ -188,6 +191,22 @@ function Product() {
         },
     ];
 
+    const handleOpenFilter = () => {
+        setOpenFilter((openFilter) => !openFilter);
+    };
+
+    useEffect(() => {
+        if (openFilter) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [openFilter]);
+
     useEffect(() => {
         const bannerHeight = document.querySelector('.banner').offsetHeight;
         const handleScroll = () => {
@@ -202,94 +221,116 @@ function Product() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const formatProductNameUrl = (name) => {
+        return name.toLowerCase().replace(/\s+/g, '-');
+    };
+
     // Get per PAGE
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProduct = productsData.slice(indexOfFirstProduct, indexOfLastProduct);
 
     return (
-        <div>
-            {/*Banner */}
-            <div className="banner w-full h-[200px] sm:h-[80vh] bg-white grid grid-cols-4">
-                <img src={IMAGES.bannerProduct1} className="h-full object-cover border-r border-black" />
-                <img src={IMAGES.bannerProduct2} className="h-full object-cover border-r border-black" />
-                <img src={IMAGES.bannerProduct3} className="h-full object-cover border-r border-black" />
-                <img src={IMAGES.bannerProduct4} className="h-full object-cover" />
-            </div>
-
-            {/*Filter */}
-            <div
-                className={`bg-white px-5 sm:px-10 py-4 ${
-                    isSticky ? 'fixed top-[80px] left-0 right-0 z-10 shadow-lg border-b border-gray-200' : ''
-                }`}
-            >
-                <div className="flex justify-between items-center text-[14px] sm:text-[20px]">
-                    <p>Home / All Products</p>
-
-                    <button className="flex items-center justify-between border border-black w-[80px] sm:w-[100px] px-2 sm:px-4 py-1 rounded-2xl ">
-                        <span>Filter </span>
-                        <span className="text-[16px]">
-                            <TbEaseInOutControlPoints />
-                        </span>
-                    </button>
+        <>
+            <div>
+                {/*Banner */}
+                <div className="banner w-full h-[200px] sm:h-[80vh] bg-white grid grid-cols-4">
+                    <img src={IMAGES.bannerProduct1} className="h-full object-cover border-r border-black" />
+                    <img src={IMAGES.bannerProduct2} className="h-full object-cover border-r border-black" />
+                    <img src={IMAGES.bannerProduct3} className="h-full object-cover border-r border-black" />
+                    <img src={IMAGES.bannerProduct4} className="h-full object-cover" />
                 </div>
-            </div>
+                {/*Filter */}
+                <div
+                    className={`bg-white px-5 sm:px-10 py-4 z-[2] ${
+                        isSticky ? 'fixed top-[80px] left-0 right-0 z-[2] shadow-lg border-b border-gray-200' : ''
+                    }`}
+                >
+                    <div className="flex justify-between items-center text-[14px] sm:text-[20px]">
+                        <p>Home / All Products</p>
 
-            {/*Products */}
-            <div className="w-full h-full bg-white">
-                <div className="grid grid-cols-2 sm:grid-cols-4">
-                    {/*Single products */}
-                    {currentProduct.map((product, index) => {
-                        return (
-                            <div key={product.id} className="h-[340px] sm:h-[480px] p-1">
-                                <div
-                                    className="relative h-[80%] w-full cursor-pointer"
-                                    onMouseEnter={() => product.image.length > 1 && setHoverProductID(product.id)}
-                                    onMouseLeave={() => setHoverProductID(null)}
+                        <button
+                            onClick={handleOpenFilter}
+                            className="flex items-center justify-between border border-black w-[80px] sm:w-[100px] px-2 sm:px-4 py-1 rounded-2xl "
+                        >
+                            <span>Filter </span>
+                            <span className="text-[16px]">
+                                <TbEaseInOutControlPoints />
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                {/*Products */}
+                <div className="w-full h-full bg-white">
+                    <div className="grid grid-cols-2 gap-x-2 sm:grid-cols-4 sm:gap-x-0">
+                        {/*Single products */}
+                        {currentProduct.map((product, index) => {
+                            return (
+                                <Link
+                                    key={product.id}
+                                    to={`/product/${product.id}/${formatProductNameUrl(product.title)}`}
+                                    className="h-[320px] sm:h-[480px] p-1"
                                 >
-                                    {/* image 1 */}
-                                    <img
-                                        src={product.image[0]}
-                                        className={`absolute h-full w-full object-cover transition-opacity duration-500 ${
-                                            hoverProductID === product.id ? 'opacity-0' : 'opacity-100'
-                                        }`}
-                                    />
-
-                                    {/* image 2 */}
-                                    {product.image.length > 1 && (
+                                    <div
+                                        className="relative h-[80%] w-full cursor-pointer"
+                                        onMouseEnter={() => product.image.length > 1 && setHoverProductID(product.id)}
+                                        onMouseLeave={() => setHoverProductID(null)}
+                                    >
+                                        {/* image 1 */}
                                         <img
-                                            src={product.image[1]}
+                                            src={product.image[0]}
                                             className={`absolute h-full w-full object-cover transition-opacity duration-500 ${
-                                                hoverProductID === product.id ? 'opacity-100' : 'opacity-0'
+                                                hoverProductID === product.id ? 'opacity-0' : 'opacity-100'
                                             }`}
                                         />
-                                    )}
 
-                                    {product.status == 'Sold Out' ? (
-                                        <span className="absolute right-2 bottom-2 bg-gray-200 px-2 font-medium text-gray-400">
-                                            {product.status}
-                                        </span>
-                                    ) : null}
-                                </div>
-                                <div className="sm:mt-[20px] px-1 sm:px-3 text-center">
-                                    <h5 className="text-[12px] sm:text-[16px] two-line-heading">{product.title}</h5>
-                                    <p className="text-[14px] mt-2 sm:text-[16px] font-semibold">
-                                        {product.price}&#8363;{' '}
-                                    </p>
-                                </div>
-                            </div>
-                        );
-                    })}
+                                        {/* image 2 */}
+                                        {product.image.length > 1 && (
+                                            <img
+                                                src={product.image[1]}
+                                                className={`absolute h-full w-full object-cover transition-opacity duration-500 ${
+                                                    hoverProductID === product.id ? 'opacity-100' : 'opacity-0'
+                                                }`}
+                                            />
+                                        )}
+
+                                        {product.status == 'Sold Out' ? (
+                                            <span className="absolute right-2 bottom-2 bg-gray-200 px-2 font-medium text-gray-400">
+                                                {product.status}
+                                            </span>
+                                        ) : null}
+                                    </div>
+                                    <div className="sm:mt-[20px] px-1 sm:px-3 text-center">
+                                        <h5 className="text-[12px] sm:text-[16px] two-line-heading">{product.title}</h5>
+                                        <p className="text-[14px] mt-2 sm:text-[16px] font-semibold">
+                                            {product.price}&#8363;{' '}
+                                        </p>
+                                    </div>
+                                </Link>
+                            );
+                        })}
+                    </div>
                 </div>
+                <Pagination
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    productsPerPage={productsPerPage}
+                    totalProducts={productsData.length}
+                />
             </div>
 
-            <Pagination
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                productsPerPage={productsPerPage}
-                totalProducts={productsData.length}
-            />
-        </div>
+            {/*Slide filter */}
+            <FilterMenu openFilter={openFilter} handleOpenFilter={handleOpenFilter} />
+
+            {/*Overlay */}
+            <div
+                className={
+                    openFilter
+                        ? 'fixed bg-black top-0 left-0 bottom-0 right-0 opacity-0 sm:opacity-80 z-0 sm:z-[4] ease duration-1000'
+                        : 'fixed bg-black top-0 left-0 bottom-0 right-0 opacity-0 ease duration-500 sm:z-[-4] pointer-events-none'
+                }
+            ></div>
+        </>
     );
 }
 

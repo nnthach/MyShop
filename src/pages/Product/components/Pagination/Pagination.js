@@ -24,6 +24,7 @@ function Pagination({ productsPerPage, totalProducts, currentPage, setCurrentPag
                 <div className="px-5">
                     {pageNumbers.map((page) => (
                         <span
+                            key={page}
                             onClick={() => {
                                 console.log('page', page);
                                 if (currentPage !== page) {
