@@ -1,14 +1,23 @@
 import { useParams } from 'react-router-dom';
 import { IMAGES_PRODUCT } from '~/assets/img';
 import { FiMinus, FiPlus } from 'react-icons/fi';
+import { IoIosArrowForward } from 'react-icons/io';
+import { AiOutlineClose } from 'react-icons/ai';
+
 import { useEffect, useState } from 'react';
 import FilterMenu from './FilterMenu/FilterMenu';
+
+import './ProductDetail.css';
+import NotiAdded from './NotiAdded/NotiAdded';
 
 function ProductDetail() {
     const { productId, productName } = useParams();
     const [isReadDes, setIsReadDes] = useState(false);
     const [openSlideBar, setOpenSlideBar] = useState(false);
+    const [openAddedProduct, setOpenAddedProduct] = useState(false);
+    const [addProductData, setAddProductData] = useState(null);
     const [slideMenuHeading, setSlideMenuHeading] = useState('');
+
     const productDetailData = {
         name: productName,
         price: 800000,
@@ -55,9 +64,12 @@ function ProductDetail() {
     };
 
     const [selectOptionData, setSelectOptionData] = useState({
+        name: productDetailData.name,
+        price: productDetailData.price,
         color: productDetailData.color,
         size: '',
         quantity: 1,
+        image: productDetailData.images[0],
     });
 
     useEffect(() => {
@@ -98,6 +110,7 @@ function ProductDetail() {
         }));
     };
 
+
     const handleChangeQuantity = (e) => {
         const value = parseInt(e.target.value, 10);
         //check is number
@@ -135,26 +148,37 @@ function ProductDetail() {
         setOpenSlideBar((prev) => !prev);
     };
 
+    const handleOpenAddedProduct = () => {
+        setOpenAddedProduct((prev) => !prev);
+    };
+
     return (
         <>
             <div>
-                <div className="grid grid-cols-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2">
                     {/*IMAGE WRAP */}
-                    <div className="overflow-y-auto bg-red-400 border-r border-gray-200">
-                        {productDetailData.images.map((image, index) => (
-                            <div key={index} className=" bg-gray-300">
-                                <img className="h-auto w-full object-cover" src={image} />
-                            </div>
-                        ))}
+                    <div className=" bg-white sm:bg-red-400 border-r border-gray-200">
+                        <div className="slider-container h-[50vh] w-full sm:h-full sm:flex-col sm:overflow-y-auto">
+                            {productDetailData.images.map((image, index) => (
+                                <div
+                                    key={index}
+                                    className="slider-item min-w-[100%] sm:w-full bg-gray-300 sm:min-h-[300px] scroll-"
+                                >
+                                    <img className="h-full w-full object-cover" src={image} alt={`product-${index}`} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
                     {/*Order and Information */}
-                    <div className="px-[200px] pt-[120px] pb-[50px] min-h-[100vh] bg-white">
+                    <div className="sticky top-0 self-start p-[24px] sm:px-[200px] sm:pt-[120px] sm:pb-[50px] min-h-[100vh] bg-white">
                         <div className=" w-full h-full">
                             {/*Name and Price */}
                             <div className="mb-4">
-                                <h5 className="text-[28px] font-semibold">{formatName(productDetailData.name)}</h5>
-                                <p className="my-2 text-[18px]">{formatPrice(productDetailData.price)} VND</p>
+                                <h5 className="text-[20px] sm:text-[28px] font-semibold">
+                                    {formatName(productDetailData.name)}
+                                </h5>
+                                <p className="sm:my-2 sm:text-[18px]">{formatPrice(productDetailData.price)} VND</p>
                             </div>
 
                             {/*Select Option */}
@@ -162,13 +186,15 @@ function ProductDetail() {
                                 onSubmit={(e) => {
                                     e.preventDefault();
                                     console.log('submit', selectOptionData);
+                                    setAddProductData(selectOptionData);
+                                    handleOpenAddedProduct();
                                 }}
                                 className="space-y-5"
                             >
                                 {/*Color */}
                                 <div className="">
                                     <p className="mb-2">Color</p>
-                                    <div className="grid grid-cols-4 gap-4">
+                                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
                                         {/*Color of this product */}
                                         <div>
                                             <div
@@ -185,7 +211,7 @@ function ProductDetail() {
                                                     className="h-full w-full object-cover"
                                                 />
                                             </div>
-                                            <div className="text-center">
+                                            <div className="text-[14px] sm:text-[16px] text-center">
                                                 <p>{productDetailData.color}</p>
                                             </div>
                                         </div>
@@ -208,7 +234,7 @@ function ProductDetail() {
                                                               className="h-full w-full object-cover"
                                                           />
                                                       </div>
-                                                      <div className="text-center">
+                                                      <div className="text-[14px] sm:text-[16px] text-center">
                                                           <p>{type.color}</p>
                                                       </div>
                                                   </div>
@@ -221,7 +247,10 @@ function ProductDetail() {
                                     <div className="flex items-center justify-between mb-2">
                                         <p className="">Size</p>
                                         <span
-                                            onClick={handleOpenSlideBar}
+                                            onClick={() => {
+                                                setSlideMenuHeading('Size chart');
+                                                handleOpenSlideBar();
+                                            }}
                                             className="font-semibold border-b border-black cursor-pointer"
                                         >
                                             Size chart
@@ -236,7 +265,7 @@ function ProductDetail() {
                                                     selectOptionData.size == sizeOption.option
                                                         ? 'border-black text-black'
                                                         : 'border-gray-300 text-gray-400'
-                                                } text-center text-[18px] py-1 cursor-pointer`}
+                                                } text-center text-[16px] sm:text-[18px] py-1 cursor-pointer`}
                                             >
                                                 {sizeOption.option}
                                             </span>
@@ -269,7 +298,7 @@ function ProductDetail() {
                                 <div className="">
                                     <button
                                         type="submit"
-                                        className="mt-4 w-full bg-black hover:bg-white text-white hover:text-black border hover:border-black text-[18px] font-medium py-3 rounded-3xl transition-all duration-300"
+                                        className="mt-4 w-full bg-black sm:hover:bg-white text-white sm:hover:text-black border hover:border-black text-[16px] sm:text-[18px] font-medium py-3 rounded-3xl transition-all duration-300"
                                     >
                                         Place in Cart
                                     </button>
@@ -308,18 +337,46 @@ function ProductDetail() {
                                     />
                                 )}
                             </div>
-                            <button className="mt-2">
+                            <button className="text-left mt-2 pb-5 border-b border-gray-200 w-full">
                                 <span onClick={toggleReadDes} className="cursor-pointer border-b border-black ">
                                     {!isReadDes ? 'Read more' : 'Read less'}
                                 </span>
                             </button>
+
+                            {/*Policy */}
+                            <div>
+                                <div className="flex items-center justify-between py-5 border-b border-gray-200">
+                                    <p>Payment Policy</p>
+                                    <IoIosArrowForward
+                                        className="cursor-pointer"
+                                        onClick={() => {
+                                            setSlideMenuHeading('Payment Policy');
+                                            handleOpenSlideBar();
+                                        }}
+                                    />
+                                </div>
+                                <div className="flex items-center justify-between py-5 border-b border-gray-200">
+                                    <p>Delivery & Return Policy</p>
+                                    <IoIosArrowForward
+                                        className="cursor-pointer"
+                                        onClick={() => {
+                                            setSlideMenuHeading('Delivery & Return Policy');
+                                            handleOpenSlideBar();
+                                        }}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/*Slide bar */}
-            <FilterMenu openSlideBar={openSlideBar} handleOpenSlideBar={handleOpenSlideBar} />
+            <FilterMenu
+                slideMenuHeading={slideMenuHeading}
+                openSlideBar={openSlideBar}
+                handleOpenSlideBar={handleOpenSlideBar}
+            />
 
             {/*Overlay */}
             <div
@@ -329,6 +386,16 @@ function ProductDetail() {
                         : 'fixed bg-black top-0 left-0 bottom-0 right-0 opacity-0 ease duration-500 sm:z-[-4] pointer-events-none'
                 }
             ></div>
+
+            {/*Noti Added to Cart */}
+            {openAddedProduct ? (
+                <NotiAdded
+                    addProductData={addProductData}
+                    formatName={formatName}
+                    handleOpenAddedProduct={handleOpenAddedProduct}
+                    setAddProductData={setAddProductData}
+                />
+            ) : null}
         </>
     );
 }

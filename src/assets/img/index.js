@@ -18,6 +18,7 @@ export const IMAGES = {
     campaign5: require('~/assets/img/campaign5.webp'),
     campaign6: require('~/assets/img/campaign6.webp'),
     logo: require('~/assets/img/maveriklogo.png'),
+    sizeChartJK: require('~/assets/img/sizeChartJK.webp'),
 };
 
 export const IMAGES_PRODUCT = {

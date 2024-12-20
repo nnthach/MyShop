@@ -1,0 +1,15 @@
+@media (max-width: 768px) {
+    .slider-container {
+        scroll-snap-type: x mandatory; /* Snap theo trục x */
+        scroll-behavior: smooth; /* Cuộn mượt */
+        display: flex; /* Hiển thị theo hàng ngang */
+        overflow-x: auto; /* Cho phép kéo ngang */
+        -webkit-overflow-scrolling: touch; /* Tương thích trên thiết bị di động */
+    }
+
+    .slider-item {
+        scroll-snap-align: start; /* Snap đầu mỗi ảnh */
+        flex: 0 0 100%; /* Mỗi item chiếm toàn bộ chiều rộng */
+        position: relative; /* Để styling hoặc hiệu ứng khác */
+    }
+}

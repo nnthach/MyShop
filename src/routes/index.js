@@ -1,3 +1,4 @@
+import Cart from '~/pages/Cart/Cart';
 import Home from '~/pages/Home/Home';
 import Product from '~/pages/Product/Product';
 import ProductDetail from '~/pages/ProductDetail/ProductDetail';
@@ -14,6 +15,10 @@ const publicRoutes = [
     {
         path: '/product/:productId/:productName',
         component: ProductDetail,
+    },
+    {
+        path: '/cart',
+        component: Cart,
     },
 ];
 
