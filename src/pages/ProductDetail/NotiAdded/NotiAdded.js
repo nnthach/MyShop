@@ -45,7 +45,7 @@ function NotiAdded({ formatName, addProductData, handleOpenAddedProduct, setAddP
                             <p className="font-semibold">
                                 Total: {(addProductData.price * addProductData.quantity).toLocaleString('vi-VN')} VND
                             </p>
-                        </div>
+                        </div>0
                     </div>
                 </div>
 
