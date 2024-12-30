@@ -1,3 +1,4 @@
+import Admin from '~/pages/Admin/Admin';
 import Cart from '~/pages/Cart/Cart';
 import Checkout from '~/pages/Checkout/Checkout';
 import Home from '~/pages/Home/Home';
@@ -27,6 +28,12 @@ const publicRoutes = [
     },
 ];
 
-const privateRoutes = [];
+const privateRoutes = [
+    {
+        path: '/admin',
+        component: Admin,
+        layout: null,
+    },
+];
 
 export { publicRoutes, privateRoutes };

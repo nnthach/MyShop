@@ -9,27 +9,30 @@ import FilterMenu from './components/FilterMenu/FilterMenu';
 function Checkout() {
     const [slideMenuHeading, setSlideMenuHeading] = useState('');
     const [openSlideBar, setOpenSlideBar] = useState(false);
+    const [step, setStep] = useState(1);
+    const [doneStep, setDoneStep] = useState([2, 3]);
+    const [updateStep, setUpdateStep] = useState(0);
 
     const handleOpenSlideBar = () => {
         setOpenSlideBar((prev) => !prev);
     };
     return (
         <>
-            <div className="bg-[#f8f8f8] px-[128px] pb-10">
+            <div className="bg-[#f8f8f8] px-6 sm:px-[128px] pb-10">
                 <div className="py-8">
                     <FaArrowLeftLong className="cursor-pointer" />
                 </div>
-                <div className="w-full min-h-[1000px] grid grid-cols-3 gap-6 ">
+                <div className="w-full min-h-[1000px] grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 ">
                     {/*Left */}
-                    <div className="col-span-2 space-y-4">
+                    <div className="sm:col-span-2 space-y-4">
                         {/*First Step */}
-                        <FirstStep />
+                        <FirstStep step={step} setStep={setStep} doneStep={doneStep} setDoneStep={setDoneStep} />
 
                         {/*Second Step */}
-                        <SecondStep />
+                        <SecondStep step={step} setStep={setStep} doneStep={doneStep} setDoneStep={setDoneStep} />
 
                         {/*Thrid Step */}
-                        <ThridStep />
+                        <ThridStep step={step} setStep={setStep} doneStep={doneStep} setDoneStep={setDoneStep} />
                     </div>
                     {/*Right */}
                     <RightCheckout setSlideMenuHeading={setSlideMenuHeading} handleOpenSlideBar={handleOpenSlideBar} />

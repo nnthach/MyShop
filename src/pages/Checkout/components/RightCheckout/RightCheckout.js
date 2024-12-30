@@ -5,21 +5,21 @@ import { IMAGES_PRODUCT } from '~/assets/img';
 
 function RightCheckout({ setSlideMenuHeading, handleOpenSlideBar }) {
     return (
-        <div className="bg-white p-8">
+        <div className="bg-white pb-0 p-6 sm:pb-8 sm:p-8">
             <div className="flex justify-between items-center">
-                <span className="font-medium text-[20px]">My Shopping Cart</span>
-                <span className="text-[14px] underline cursor-pointer">Modify the Selection</span>
+                <span className="font-medium text-[18px] sm:text-[20px]">My Shopping Cart</span>
+                <span className="text-[12px] sm:text-[14px] underline cursor-pointer">Modify the Selection</span>
             </div>
             <div className="flex items-center mt-8 pb-4 border-b border-gray-300">
-                <div className="bg-gray-200 w-[100px] h-[100px] border mr-5">
+                <div className="bg-gray-200 w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] border mr-5">
                     <img src={IMAGES_PRODUCT.jacketDenimBlue1_1} className="w-auto h-full object-cover" />
                 </div>
-                <div>
+                <div className="text-[14px] sm:text-4">
                     <p>Maverik 2 In 1 Denim Jacket</p>
                     <p>800.000 VND</p>
                 </div>
             </div>
-            <div className="font-medium mt-4">
+            <div className="text-[14px] sm:text-4 font-medium mt-4">
                 <div className="flex justify-between text-center mb-2">
                     <p>Subtotal</p>
                     <p>1000000 VND</p>
@@ -32,7 +32,7 @@ function RightCheckout({ setSlideMenuHeading, handleOpenSlideBar }) {
                     <p>Tax</p>
                     <p>10000000 VND</p>
                 </div>
-                <div className="flex justify-between text-center text-[20px] my-6">
+                <div className="flex justify-between text-center text-[18px] sm:text-[20px] my-6">
                     <p>Total</p>
                     <p>10000000 VND</p>
                 </div>
