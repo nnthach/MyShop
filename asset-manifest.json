@@ -1,0 +1,42 @@
+{
+  "files": {
+    "main.css": "/MyShop/static/css/main.75332ec2.css",
+    "main.js": "/MyShop/static/js/main.29c5e410.js",
+    "static/js/488.3e1c6d95.chunk.js": "/MyShop/static/js/488.3e1c6d95.chunk.js",
+    "static/media/campaign1.mp4": "/MyShop/static/media/campaign1.30f74e91cb733d06f157.mp4",
+    "static/media/banner2.jpg": "/MyShop/static/media/banner2.f7cec2d6206d4a2e0738.jpg",
+    "static/media/jacketDenimRaw1_1.jpeg": "/MyShop/static/media/jacketDenimRaw1_1.41a2f3fad67972edbe3c.jpeg",
+    "static/media/jacketDenimRaw1_2.jpeg": "/MyShop/static/media/jacketDenimRaw1_2.3bc8633eeba75b0bd716.jpeg",
+    "static/media/bannerProduct3.avif": "/MyShop/static/media/bannerProduct3.c19a031151da7475ef5e.avif",
+    "static/media/bannerProduct1.avif": "/MyShop/static/media/bannerProduct1.c2faa33e9a7a71014934.avif",
+    "static/media/bannerProduct4.avif": "/MyShop/static/media/bannerProduct4.cccadac9980098456597.avif",
+    "static/media/bannerProduct2.avif": "/MyShop/static/media/bannerProduct2.ac9d06a9d8229ac37802.avif",
+    "static/media/jacketDenimBlue1_4.jpeg": "/MyShop/static/media/jacketDenimBlue1_4.e38ce228699263fe6e16.jpeg",
+    "static/media/jacketDenimBlue1_2.jpeg": "/MyShop/static/media/jacketDenimBlue1_2.0f4e4a6da8e4e7bf8b36.jpeg",
+    "static/media/jacketDenimBlue1_5.jpeg": "/MyShop/static/media/jacketDenimBlue1_5.a61b978d184ba11ee6c9.jpeg",
+    "static/media/banner3.webp": "/MyShop/static/media/banner3.97d22873271e87675679.webp",
+    "static/media/jacketDenimBlue1_1.jpeg": "/MyShop/static/media/jacketDenimBlue1_1.8a0b1347d261c5a84ed1.jpeg",
+    "static/media/jacketDenimBlue1_6.jpeg": "/MyShop/static/media/jacketDenimBlue1_6.e142ddab085c9fb7b261.jpeg",
+    "static/media/jacketDenimBlue1_3.jpeg": "/MyShop/static/media/jacketDenimBlue1_3.08eb44808bb1d8181643.jpeg",
+    "static/media/jacketDenimRaw1_3.jpeg": "/MyShop/static/media/jacketDenimRaw1_3.f87797c6ebbb075620a6.jpeg",
+    "static/media/banner1.jpg": "/MyShop/static/media/banner1.a4130047b487dcdf59d4.jpg",
+    "static/media/pants1_2.webp": "/MyShop/static/media/pants1_2.68548d9464556b789ae9.webp",
+    "static/media/maveriklogo.png": "/MyShop/static/media/maveriklogo.2a1e893335984a19628f.png",
+    "static/media/pant.webp": "/MyShop/static/media/pant.77662268b9e6edfbabbf.webp",
+    "static/media/campaign5.webp": "/MyShop/static/media/campaign5.0aa0b24d06b9831ff191.webp",
+    "static/media/campaign4.webp": "/MyShop/static/media/campaign4.6a72e477f218c6ab44f0.webp",
+    "static/media/campaign3.webp": "/MyShop/static/media/campaign3.477d0510658f1c1364b0.webp",
+    "static/media/campaign6.webp": "/MyShop/static/media/campaign6.09ff477cfdf6ac1f7951.webp",
+    "static/media/campaign2.webp": "/MyShop/static/media/campaign2.33f561cbfe6c92807e61.webp",
+    "static/media/sizeChartJK.webp": "/MyShop/static/media/sizeChartJK.075856e505f6e5977ace.webp",
+    "static/media/tshirt1.avif": "/MyShop/static/media/tshirt1.62d4ed6481a3b76d2dfc.avif",
+    "index.html": "/MyShop/index.html",
+    "main.75332ec2.css.map": "/MyShop/static/css/main.75332ec2.css.map",
+    "main.29c5e410.js.map": "/MyShop/static/js/main.29c5e410.js.map",
+    "488.3e1c6d95.chunk.js.map": "/MyShop/static/js/488.3e1c6d95.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.75332ec2.css",
+    "static/js/main.29c5e410.js"
+  ]
+}
