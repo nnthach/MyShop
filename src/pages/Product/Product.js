@@ -1,7 +1,7 @@
 import { IMAGES, IMAGES_PRODUCT } from '../../assets/img';
 import { TbEaseInOutControlPoints } from 'react-icons/tb';
 import { useEffect, useState } from 'react';
-import Pagination from './components/Pagination/Pagination';
+import Pagination from '../../components/Pagination/Pagination';
 import FilterMenu from './components/FilterMenu/FilterMenu';
 import { Link } from 'react-router-dom';
 
