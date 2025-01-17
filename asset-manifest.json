@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/MyShop/static/css/main.75332ec2.css",
-    "main.js": "/MyShop/static/js/main.29c5e410.js",
+    "main.js": "/MyShop/static/js/main.953407e8.js",
     "static/js/488.3e1c6d95.chunk.js": "/MyShop/static/js/488.3e1c6d95.chunk.js",
     "static/media/campaign1.mp4": "/MyShop/static/media/campaign1.30f74e91cb733d06f157.mp4",
     "static/media/banner2.jpg": "/MyShop/static/media/banner2.f7cec2d6206d4a2e0738.jpg",
@@ -32,11 +32,11 @@
     "static/media/tshirt1.avif": "/MyShop/static/media/tshirt1.62d4ed6481a3b76d2dfc.avif",
     "index.html": "/MyShop/index.html",
     "main.75332ec2.css.map": "/MyShop/static/css/main.75332ec2.css.map",
-    "main.29c5e410.js.map": "/MyShop/static/js/main.29c5e410.js.map",
+    "main.953407e8.js.map": "/MyShop/static/js/main.953407e8.js.map",
     "488.3e1c6d95.chunk.js.map": "/MyShop/static/js/488.3e1c6d95.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.75332ec2.css",
-    "static/js/main.29c5e410.js"
+    "static/js/main.953407e8.js"
   ]
 }
