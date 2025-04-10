@@ -1,13 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home/Home';
-import Product from './pages/Product/Product';
 import { privateRoutes, publicRoutes } from './routes';
 import DefaultLayout from './components/Layout/DefaultLayout/DefaultLayout';
 import { Fragment } from 'react';
+import SideBar from '~/components/SideBar/SideBar';
 
 function App() {
     return (
         <div>
+            <SideBar />
             <Routes>
                 {publicRoutes.map((route, index) => {
                     let Layout = DefaultLayout;

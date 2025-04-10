@@ -169,7 +169,7 @@ function Home() {
                     {/*Wrap all product */}
                     <div className="new-arrival grid grid-cols-2 sm:grid-cols-4 gap-5 my-10">
                         {newArrivalData.map((item, index) => (
-                            <Link to={`/products/${item.category}/search?name${item.name}`}>
+                            <Link to={`/products/${item.category}/search?name${item.name}`} key={index}>
                                 <div key={index} className="bg-white cursor-pointer hover:scale-105">
                                     <img src={IMAGES.pants1_1} alt="item" className="" />
                                     <div className="flex flex-col">
