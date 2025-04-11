@@ -13,10 +13,19 @@ function Product() {
     const [isSticky, setIsSticky] = useState(false);
     const [openFilter, setOpenFilter] = useState(false);
     const productsPerPage = 16;
-    const { isLoading, allProductData } = useContext(ProductsContext);
+    const { filterData, setFilterData, initialData, handleGetAllProduct, isLoading, allProductData } =
+        useContext(ProductsContext);
 
     const handleOpenFilter = () => {
         setOpenFilter((openFilter) => !openFilter);
+    };
+
+    const handleClearFilter = (e) => {
+        e.preventDefault();
+
+        console.log('clear', filterData);
+        setFilterData(initialData);
+        handleGetAllProduct(filterData);
     };
 
     useEffect(() => {
@@ -91,7 +100,15 @@ function Product() {
                 {/*Products */}
                 <div className="w-full min-h-[100px] bg-white">
                     {allProductData.length === 0 ? (
-                        <p className="text-center font-bold">No Products Found</p>
+                        <div className="text-center">
+                            <p className="text-center font-bold">No Products Found</p>
+                            <button
+                                className="border border-black rounded-3xl py-1 px-2 mt-2"
+                                onClick={(e) => handleClearFilter(e)}
+                            >
+                                Return Default
+                            </button>
+                        </div>
                     ) : (
                         <>
                             <div className="w-full h-full bg-white">
@@ -114,7 +131,7 @@ function Product() {
             </div>
 
             {/*Slide filter */}
-            <FilterMenu openFilter={openFilter} handleOpenFilter={handleOpenFilter} />
+            <FilterMenu setOpenFilter={setOpenFilter} openFilter={openFilter} handleOpenFilter={handleOpenFilter} />
 
             {/*Overlay */}
             <div

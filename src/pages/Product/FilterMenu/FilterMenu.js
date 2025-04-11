@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { ProductsContext } from '~/context/ProductsContext';
 
-function FilterMenu({ openFilter, handleOpenFilter }) {
+function FilterMenu({ openFilter, handleOpenFilter, setOpenFilter }) {
     const { sortBy, colors, size, filterData, setFilterData, initialData, handleGetAllProduct } =
         useContext(ProductsContext);
 
@@ -12,7 +12,16 @@ function FilterMenu({ openFilter, handleOpenFilter }) {
         console.log(filterData);
         handleGetAllProduct(filterData);
         setFilterData(initialData);
-        handleOpenFilter()
+        handleOpenFilter();
+    };
+
+    const handleClearFilter = (e) => {
+        e.preventDefault();
+
+        console.log('clear', filterData);
+        setFilterData(initialData);
+        handleGetAllProduct(filterData);
+        handleOpenFilter();
     };
 
     const handleFilterSortBy = (sortBy) => {
@@ -125,8 +134,8 @@ function FilterMenu({ openFilter, handleOpenFilter }) {
                 <div className="sticky bottom-0 bg-white w-full border-t border-black grid grid-cols-2 gap-4 p-5 text-[14px] sm:text-[16px] font-medium z-10">
                     <button
                         type="reset"
-                        onClick={() => {
-                            setFilterData({ sortBy: '', colour: [], size: [] });
+                        onClick={(e) => {
+                            handleClearFilter(e);
                         }}
                         className="border border-black py-2"
                     >
