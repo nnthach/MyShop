@@ -1,9 +1,11 @@
 import { IMAGES } from '../../assets/img';
 import './home.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import VIDEOS from '~/assets/video';
+import { ProductsContext } from '~/context/ProductsContext';
+import ProductCard from '~/components/ProductCard/ProductCard';
 
 function Home() {
     const [index, setIndex] = useState(0);
@@ -12,6 +14,7 @@ function Home() {
     const [startX, setStartX] = useState(0);
     const [scrollLeft, setScrollLeft] = useState(0);
     const bannerData = [IMAGES.banner1, IMAGES.banner2, IMAGES.banner3];
+    const { allProductData } = useContext(ProductsContext);
 
     const newArrivalData = [
         {
@@ -168,16 +171,8 @@ function Home() {
 
                     {/*Wrap all product */}
                     <div className="new-arrival grid grid-cols-2 sm:grid-cols-4 gap-5 my-10">
-                        {newArrivalData.map((item, index) => (
-                            <Link to={`/products/${item.category}/search?name${item.name}`} key={index}>
-                                <div key={index} className="bg-white cursor-pointer hover:scale-105">
-                                    <img src={IMAGES.pants1_1} alt="item" className="" />
-                                    <div className="flex flex-col">
-                                        <h5 className="two-line-heading p-2 h-[64px]">{item.name}</h5>
-                                        <p className="font-semibold mt-auto">{item.price}&#8363;</p>
-                                    </div>
-                                </div>
-                            </Link>
+                        {allProductData.slice(0, 8).map((item) => (
+                            <ProductCard product={item} />
                         ))}
                     </div>
 

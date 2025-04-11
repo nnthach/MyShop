@@ -1,49 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import { ProductsContext } from '~/context/ProductsContext';
 
 function FilterMenu({ openFilter, handleOpenFilter }) {
-    const [openChild, setOpenChild] = useState(null);
-    const [filterData, setFilterData] = useState({
-        sortBy: '',
-        colour: [],
-        size: [],
-    });
-
-    const sortBy = ['Latest Arrivals', 'Price - High to Low', 'Price - Low to High'];
-
-    const colors = [
-        { name: 'Black', bgColor: 'bg-black' },
-        { name: 'White', bgColor: 'bg-white' },
-        { name: 'Grey', bgColor: 'bg-gray-400' },
-        { name: 'Brown', bgColor: 'bg-amber-800' },
-        { name: 'Beige', bgColor: 'bg-[beige]' },
-        { name: 'Yellow', bgColor: 'bg-yellow-300' },
-        { name: 'Red', bgColor: 'bg-red-600' },
-        { name: 'Orange', bgColor: 'bg-orange-500' },
-        { name: 'Blue', bgColor: 'bg-blue-600' },
-        { name: 'Green', bgColor: 'bg-green-600' },
-        { name: 'Purple', bgColor: 'bg-purple-600' },
-        { name: 'Pink', bgColor: 'bg-pink-400' },
-    ];
-
-    const size = ['S', 'M', 'L', 'XL'];
-
-    const handleOpenChild = (index) => {
-        setOpenChild((prev) => (prev === index ? null : index));
-    };
+    const { sortBy, colors, size, filterData, setFilterData, initialData, handleGetAllProduct } =
+        useContext(ProductsContext);
 
     const handleApplyFilter = (e) => {
         e.preventDefault();
 
         console.log(filterData);
+        handleGetAllProduct(filterData);
+        setFilterData(initialData);
+        handleOpenFilter()
+    };
+
+    const handleFilterSortBy = (sortBy) => {
+        setFilterData((prev) => ({
+            ...prev,
+            sortBy: prev.sortBy === sortBy ? '' : sortBy,
+        }));
     };
 
     const handleFilterColor = (color) => {
         setFilterData((prev) => ({
             ...prev,
-            colour: prev.colour.includes(color)
-                ? prev.colour.filter((selectedColor) => selectedColor !== color)
-                : [...prev.colour, color],
+            color: prev.color.includes(color)
+                ? prev.color.filter((selectedColor) => selectedColor !== color)
+                : [...prev.color, color],
         }));
     };
 
@@ -55,10 +39,6 @@ function FilterMenu({ openFilter, handleOpenFilter }) {
                 : [...prev.size, sizeChoose],
         }));
     };
-
-    useEffect(() => {
-        setOpenChild(null);
-    }, [handleOpenFilter]);
 
     return (
         <div
@@ -85,7 +65,7 @@ function FilterMenu({ openFilter, handleOpenFilter }) {
                                 <li
                                     key={option}
                                     onClick={() => {
-                                        setFilterData((prev) => ({ ...prev, sortBy: option }));
+                                        handleFilterSortBy(option);
                                     }}
                                     className={`border ${
                                         filterData.sortBy === option ? 'border-black' : 'border-gray-400'
@@ -108,7 +88,7 @@ function FilterMenu({ openFilter, handleOpenFilter }) {
                                     key={color.name}
                                     onClick={() => handleFilterColor(color.name)}
                                     className={`relative border ${
-                                        filterData.colour.includes(color.name) ? 'border-black' : 'border-gray-400'
+                                        filterData.color.includes(color.name) ? 'border-black' : 'border-gray-400'
                                     }  hover:border-black text-[14px] sm:text-[16px] py-2 cursor-pointer`}
                                 >
                                     {color.name}

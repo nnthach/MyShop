@@ -9,7 +9,6 @@ import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
 import ProductCard from '~/components/ProductCard/ProductCard';
 
 function Product() {
-    const [hoverProductID, setHoverProductID] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [isSticky, setIsSticky] = useState(false);
     const [openFilter, setOpenFilter] = useState(false);
@@ -45,10 +44,6 @@ function Product() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    const formatProductNameUrl = (name) => {
-        return name.toLowerCase().replace(/\s+/g, '-');
-    };
 
     // Get per PAGE
     const indexOfLastProduct = currentPage * productsPerPage;
@@ -103,7 +98,7 @@ function Product() {
                                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-x-4">
                                     {/*Single products */}
                                     {currentProduct.map((product, index) => {
-                                        return <ProductCard product={product} />;
+                                        return <ProductCard product={product} key={index} />;
                                     })}
                                 </div>
                             </div>
