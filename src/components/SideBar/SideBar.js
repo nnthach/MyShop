@@ -34,7 +34,7 @@ function SideBar() {
             />
 
             <div
-                className={`bg-white p-4 fixed top-0 ${
+                className={`bg-white p-4 fixed top-0  overflow-y-auto ${
                     type === 'Menu' ? 'left-0' : 'right-0'
                 } w-[300px] h-full transform transition-transform duration-300 ease-in-out z-20     ${
                     isOpen
@@ -44,16 +44,19 @@ function SideBar() {
                         : 'translate-x-full invisible z-0'
                 } `}
             >
-                <span
-                    className={`cursor-pointer absolute text-3xl ${
-                        type === 'Menu' ? 'right-[-50px]' : 'left-[-50px]'
-                    } top-4 bg-white w-[40px] h-[40px] rounded-full text-center leading-[36px]`}
-                    onClick={handleToggleSidebar}
-                >
-                    &times;
-                </span>
                 {handleRenderSideBarContent()}
             </div>
+
+            <span
+                className={`cursor-pointer absolute text-3xl z-20 duration-100 transition-all ease-in-out ${
+                    type === 'Menu' ? 'left-[310px]' : 'right-[310px]'
+                } top-[-60px] ${
+                    isOpen ? 'visible' : 'invisible z-0'
+                } bg-white w-[40px] h-[40px] rounded-full text-center leading-[36px]`}
+                onClick={handleToggleSidebar}
+            >
+                &times;
+            </span>
         </div>
     );
 }

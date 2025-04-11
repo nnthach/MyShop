@@ -3,10 +3,12 @@ import { privateRoutes, publicRoutes } from './routes';
 import DefaultLayout from './components/Layout/DefaultLayout/DefaultLayout';
 import { Fragment } from 'react';
 import SideBar from '~/components/SideBar/SideBar';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
     return (
         <div>
+            <ToastContainer />
             <SideBar />
             <Routes>
                 {publicRoutes.map((route, index) => {

@@ -1,9 +1,12 @@
-import { IMAGES, IMAGES_PRODUCT } from '../../assets/img';
+import { IMAGES } from '../../assets/img';
 import { TbEaseInOutControlPoints } from 'react-icons/tb';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination/Pagination';
-import FilterMenu from './components/FilterMenu/FilterMenu';
+import FilterMenu from './FilterMenu/FilterMenu';
 import { Link } from 'react-router-dom';
+import { ProductsContext } from '~/context/ProductsContext';
+import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
+import ProductCard from '~/components/ProductCard/ProductCard';
 
 function Product() {
     const [hoverProductID, setHoverProductID] = useState(null);
@@ -11,185 +14,7 @@ function Product() {
     const [isSticky, setIsSticky] = useState(false);
     const [openFilter, setOpenFilter] = useState(false);
     const productsPerPage = 16;
-
-    const productsData = [
-        {
-            id: 1,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'pants',
-            status: 'Sold Out',
-            image: [IMAGES.pants1_1, IMAGES.pants1_2],
-        },
-        {
-            id: 2,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'jacket',
-            status: 'In Stock',
-            image: [IMAGES_PRODUCT.jacketDenimBlue1_1, IMAGES_PRODUCT.jacketDenimBlue1_2],
-        },
-        {
-            id: 3,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'pants',
-            status: 'Sold Out',
-            image: [IMAGES.pants1_1, IMAGES.pants1_2],
-        },
-        {
-            id: 4,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'jacket',
-            status: 'In Stock',
-            image: [IMAGES_PRODUCT.jacketDenimRaw1_1, IMAGES_PRODUCT.jacketDenimRaw1_2],
-        },
-        {
-            id: 5,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'jacket',
-            status: 'In Stock',
-            image: [IMAGES_PRODUCT.jacketDenimBlue1_1, IMAGES_PRODUCT.jacketDenimBlue1_2],
-        },
-        {
-            id: 6,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'pants',
-            status: 'In Stock',
-            image: [IMAGES.pants1_1, IMAGES.pants1_2],
-        },
-        {
-            id: 7,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'jacket',
-            status: 'Sold Out',
-            image: [IMAGES_PRODUCT.jacketDenimBlue1_1],
-        },
-        {
-            id: 8,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'jacket',
-            status: 'In Stock',
-            image: [IMAGES_PRODUCT.jacketDenimRaw1_1, IMAGES_PRODUCT.jacketDenimRaw1_2],
-        },
-        {
-            id: 9,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'jacket',
-            status: 'In Stock',
-            image: [IMAGES_PRODUCT.jacketDenimBlue1_1, IMAGES_PRODUCT.jacketDenimBlue1_2],
-        },
-        {
-            id: 10,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'pants',
-            status: 'In Stock',
-            image: [IMAGES.pants1_1, IMAGES.pants1_2],
-        },
-        {
-            id: 11,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'jacket',
-            status: 'In Stock',
-            image: [IMAGES_PRODUCT.jacketDenimBlue1_1, IMAGES_PRODUCT.jacketDenimBlue1_2],
-        },
-        {
-            id: 12,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'pants',
-            status: 'In Stock',
-            image: [IMAGES.pants1_1, IMAGES.pants1_2],
-        },
-        {
-            id: 13,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'jacket',
-            status: 'In Stock',
-            image: [IMAGES_PRODUCT.jacketDenimBlue1_1, IMAGES_PRODUCT.jacketDenimBlue1_2],
-        },
-        {
-            id: 14,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'pants',
-            status: 'In Stock',
-            image: [IMAGES.pants1_1, IMAGES.pants1_2],
-        },
-        {
-            id: 15,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'pants',
-            status: 'In Stock',
-            image: [IMAGES.pants1_1, IMAGES.pants1_2],
-        },
-        {
-            id: 16,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'jacket',
-            status: 'In Stock',
-            image: [IMAGES_PRODUCT.jacketDenimBlue1_1, IMAGES_PRODUCT.jacketDenimBlue1_2],
-        },
-        {
-            id: 17,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'jacket',
-            status: 'In Stock',
-            image: [IMAGES_PRODUCT.jacketDenimRaw1_1, IMAGES_PRODUCT.jacketDenimRaw1_2],
-        },
-        {
-            id: 18,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'jacket',
-            status: 'In Stock',
-            image: [IMAGES_PRODUCT.jacketDenimBlue1_1, IMAGES_PRODUCT.jacketDenimBlue1_2],
-        },
-        {
-            id: 19,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'pants',
-            status: 'In Stock',
-            image: [IMAGES.pants1_1, IMAGES.pants1_2],
-        },
-        {
-            id: 20,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'jacket',
-            status: 'In Stock',
-            image: [IMAGES_PRODUCT.jacketDenimRaw1_1, IMAGES_PRODUCT.jacketDenimRaw1_2],
-        },
-        {
-            id: 21,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'pants',
-            status: 'In Stock',
-            image: [IMAGES.pants1_1, IMAGES.pants1_2],
-        },
-        {
-            id: 22,
-            title: 'MAVERIK 2 IN 1 DENIM PANTS',
-            price: 800000,
-            category: 'jacket',
-            status: 'In Stock',
-            image: [IMAGES_PRODUCT.jacketDenimBlue1_1, IMAGES_PRODUCT.jacketDenimBlue1_2],
-        },
-    ];
+    const { isLoading, allProductData } = useContext(ProductsContext);
 
     const handleOpenFilter = () => {
         setOpenFilter((openFilter) => !openFilter);
@@ -228,8 +53,15 @@ function Product() {
     // Get per PAGE
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProduct = productsData.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentProduct = allProductData.slice(indexOfFirstProduct, indexOfLastProduct);
 
+    if (isLoading) {
+        return (
+            <div className="fixed inset-0 z-50 bg-white bg-opacity-80 flex justify-center items-center">
+                <LoadingIcon />
+            </div>
+        );
+    }
     return (
         <>
             <div>
@@ -260,63 +92,30 @@ function Product() {
                         </button>
                     </div>
                 </div>
+
                 {/*Products */}
-                <div className="w-full h-full bg-white">
-                    <div className="grid grid-cols-2 gap-x-2 sm:grid-cols-4 sm:gap-x-0">
-                        {/*Single products */}
-                        {currentProduct.map((product, index) => {
-                            return (
-                                <Link
-                                    key={product.id}
-                                    to={`/product/${product.id}/${formatProductNameUrl(product.title)}`}
-                                    className="h-[320px] sm:h-[480px] p-1"
-                                >
-                                    <div
-                                        className="relative h-[80%] w-full cursor-pointer"
-                                        onMouseEnter={() => product.image.length > 1 && setHoverProductID(product.id)}
-                                        onMouseLeave={() => setHoverProductID(null)}
-                                    >
-                                        {/* image 1 */}
-                                        <img
-                                            src={product.image[0]}
-                                            className={`absolute h-full w-full object-cover transition-opacity duration-500 ${
-                                                hoverProductID === product.id ? 'opacity-0' : 'opacity-100'
-                                            }`}
-                                        />
-
-                                        {/* image 2 */}
-                                        {product.image.length > 1 && (
-                                            <img
-                                                src={product.image[1]}
-                                                className={`absolute h-full w-full object-cover transition-opacity duration-500 ${
-                                                    hoverProductID === product.id ? 'opacity-100' : 'opacity-0'
-                                                }`}
-                                            />
-                                        )}
-
-                                        {product.status == 'Sold Out' ? (
-                                            <span className="absolute right-2 bottom-2 bg-gray-200 px-2 font-medium text-gray-400">
-                                                {product.status}
-                                            </span>
-                                        ) : null}
-                                    </div>
-                                    <div className="sm:mt-[20px] px-1 sm:px-3 text-center">
-                                        <h5 className="text-[12px] sm:text-[16px] two-line-heading">{product.title}</h5>
-                                        <p className="text-[14px] mt-2 sm:text-[16px] font-semibold">
-                                            {product.price}&#8363;{' '}
-                                        </p>
-                                    </div>
-                                </Link>
-                            );
-                        })}
-                    </div>
+                <div className="w-full min-h-[100px] bg-white">
+                    {allProductData.length === 0 ? (
+                        <p className="text-center font-bold">No Products Found</p>
+                    ) : (
+                        <>
+                            <div className="w-full h-full bg-white">
+                                <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-x-4">
+                                    {/*Single products */}
+                                    {currentProduct.map((product, index) => {
+                                        return <ProductCard product={product} />;
+                                    })}
+                                </div>
+                            </div>
+                            <Pagination
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                                productsPerPage={productsPerPage}
+                                totalProducts={allProductData.length}
+                            />
+                        </>
+                    )}
                 </div>
-                <Pagination
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    productsPerPage={productsPerPage}
-                    totalProducts={productsData.length}
-                />
             </div>
 
             {/*Slide filter */}

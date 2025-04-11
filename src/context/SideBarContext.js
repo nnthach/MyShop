@@ -5,8 +5,6 @@ export const SideBarContext = createContext();
 export const SideBarProvider = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [type, setType] = useState('');
-    console.log('type', type);
-    console.log(isOpen);
 
     useEffect(() => {
         if (isOpen) {
