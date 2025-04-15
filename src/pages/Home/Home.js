@@ -171,8 +171,8 @@ function Home() {
 
                     {/*Wrap all product */}
                     <div className="new-arrival grid grid-cols-2 sm:grid-cols-4 gap-5 my-10">
-                        {allProductData.slice(0, 8).map((item) => (
-                            <ProductCard product={item} />
+                        {allProductData.slice(0, 8).map((item, index) => (
+                            <ProductCard product={item} key={index} />
                         ))}
                     </div>
 

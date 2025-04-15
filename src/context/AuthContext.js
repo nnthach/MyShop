@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     console.log('authdata', authData);
 
     const handleLogout = () => {
-        Cookies.remove('token');
+        Cookies.remove('accessToken');
         Cookies.remove('refreshToken');
         Cookies.remove('userId');
         setAuthData(null);

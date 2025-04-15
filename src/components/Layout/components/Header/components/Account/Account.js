@@ -9,8 +9,6 @@ import { SideBarContext } from '~/context/SideBarContext';
 
 function Account() {
     const [openSearch, setOpenSearch] = useState(false);
-    const [searchValue, setSearchValue] = useState('');
-    const [searchResult, setSearchResult] = useState([]);
     const { setIsOpen, setType } = useContext(SideBarContext);
 
     const handleOpenSearch = () => {
@@ -26,14 +24,17 @@ function Account() {
             <AiOutlineShoppingCart
                 className="cursor-pointer hover:border-b hover:border-black"
                 onClick={() => {
-                    setIsOpen(true);
                     setType('Cart');
+                    setIsOpen(true);
                 }}
             />
-            <AiOutlineUser className="cursor-pointer hover:border-b hover:border-black" onClick={() => {
-                    setIsOpen(true);
+            <AiOutlineUser
+                className="cursor-pointer hover:border-b hover:border-black"
+                onClick={() => {
                     setType('Account');
-                }}/>
+                    setIsOpen(true);
+                }}
+            />
         </div>
     );
 }

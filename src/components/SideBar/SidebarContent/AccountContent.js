@@ -6,7 +6,7 @@ import { SideBarContext } from '~/context/SideBarContext';
 import { loginAPI, registerAPI } from '~/service/authService';
 
 function AccountContent() {
-    const { userId } = useContext(AuthContext);
+    const { userId, handleLogout } = useContext(AuthContext);
     const { setIsOpen } = useContext(SideBarContext);
     const [isLogin, setIsLogin] = useState(true);
     const initialFormData = {
@@ -80,95 +80,104 @@ function AccountContent() {
                 {userId ? 'Account' : isLogin ? 'Sign In' : 'Sign Up'}
             </h4>
 
-            <form onSubmit={handleSubmitForm} className="flex flex-col gap-y-2">
-                <div className="flex flex-col gap-y-1">
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        placeholder="Enter email"
-                        id="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="border border-gray-400 px-2 py-1 text-[14px] outline-none"
-                    />
-                    <span className="text-[12px] text-red-500">error</span>
+            {userId ? (
+                <div>
+                    <p>My Account</p>
+                    <p className="cursor-pointer" onClick={handleLogout}>
+                        Sign Out
+                    </p>
                 </div>
-
-                {!isLogin && (
+            ) : (
+                <form onSubmit={handleSubmitForm} className="flex flex-col gap-y-2">
                     <div className="flex flex-col gap-y-1">
-                        <label>Username</label>
+                        <label>Email</label>
                         <input
-                            type="text"
-                            placeholder="Enter username"
-                            id="username"
-                            value={formData.username}
+                            type="email"
+                            placeholder="Enter email"
+                            id="email"
+                            value={formData.email}
                             onChange={handleInputChange}
                             className="border border-gray-400 px-2 py-1 text-[14px] outline-none"
                         />
                         <span className="text-[12px] text-red-500">error</span>
                     </div>
-                )}
 
-                <div className="flex flex-col gap-y-1">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        placeholder="Enter password"
-                        id="password"
-                        value={formData.password}
-                        onChange={handleInputChange}
-                        className="border border-gray-400 px-2 py-1 text-[14px] outline-none"
-                    />
-                    <span className="text-[12px] text-red-500">error</span>
-                </div>
+                    {!isLogin && (
+                        <div className="flex flex-col gap-y-1">
+                            <label>Username</label>
+                            <input
+                                type="text"
+                                placeholder="Enter username"
+                                id="username"
+                                value={formData.username}
+                                onChange={handleInputChange}
+                                className="border border-gray-400 px-2 py-1 text-[14px] outline-none"
+                            />
+                            <span className="text-[12px] text-red-500">error</span>
+                        </div>
+                    )}
 
-                {!isLogin && (
                     <div className="flex flex-col gap-y-1">
-                        <label>Confirm Password</label>
+                        <label>Password</label>
                         <input
                             type="password"
-                            placeholder="Enter confirm password"
-                            id="confirm_password"
-                            value={formData.confirm_password}
+                            placeholder="Enter password"
+                            id="password"
+                            value={formData.password}
                             onChange={handleInputChange}
                             className="border border-gray-400 px-2 py-1 text-[14px] outline-none"
                         />
                         <span className="text-[12px] text-red-500">error</span>
                     </div>
-                )}
 
-                <button type="submit" className="mt-4 bg-black text-white p-2 text-[14px] font-semibold">
-                    {isLogin ? 'Sign In' : 'Sign Up'}
-                </button>
+                    {!isLogin && (
+                        <div className="flex flex-col gap-y-1">
+                            <label>Confirm Password</label>
+                            <input
+                                type="password"
+                                placeholder="Enter confirm password"
+                                id="confirm_password"
+                                value={formData.confirm_password}
+                                onChange={handleInputChange}
+                                className="border border-gray-400 px-2 py-1 text-[14px] outline-none"
+                            />
+                            <span className="text-[12px] text-red-500">error</span>
+                        </div>
+                    )}
 
-                {isLogin ? (
-                    <p className="text-[14px]">
-                        Do not have account?{' '}
-                        <span
-                            className="text-blue-500 underline cursor-pointer"
-                            onClick={() => {
-                                setIsLogin(false);
-                                setFormData(initialFormData);
-                            }}
-                        >
-                            Create account
-                        </span>
-                    </p>
-                ) : (
-                    <p className="text-[14px]">
-                        Already have account?{' '}
-                        <span
-                            className="text-blue-500 underline cursor-pointer"
-                            onClick={() => {
-                                setIsLogin(true);
-                                setFormData(initialFormData);
-                            }}
-                        >
-                            Sign In
-                        </span>
-                    </p>
-                )}
-            </form>
+                    <button type="submit" className="mt-4 bg-black text-white p-2 text-[14px] font-semibold">
+                        {isLogin ? 'Sign In' : 'Sign Up'}
+                    </button>
+
+                    {isLogin ? (
+                        <p className="text-[14px]">
+                            Do not have account?{' '}
+                            <span
+                                className="text-blue-500 underline cursor-pointer"
+                                onClick={() => {
+                                    setIsLogin(false);
+                                    setFormData(initialFormData);
+                                }}
+                            >
+                                Create account
+                            </span>
+                        </p>
+                    ) : (
+                        <p className="text-[14px]">
+                            Already have account?{' '}
+                            <span
+                                className="text-blue-500 underline cursor-pointer"
+                                onClick={() => {
+                                    setIsLogin(true);
+                                    setFormData(initialFormData);
+                                }}
+                            >
+                                Sign In
+                            </span>
+                        </p>
+                    )}
+                </form>
+            )}
         </div>
     );
 }

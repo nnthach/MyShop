@@ -1,10 +1,8 @@
-import {  useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function ProductCard({ product }) {
     const [hoverProductID, setHoverProductID] = useState(null);
-    const [isSticky, setIsSticky] = useState(false);
-    const [openFilter, setOpenFilter] = useState(false);
 
     const formatProductNameUrl = (name) => {
         return name.toLowerCase().replace(/\s+/g, '-');
@@ -12,7 +10,8 @@ function ProductCard({ product }) {
     return (
         <Link
             key={product._id}
-            to={`/product/${product._id}/${formatProductNameUrl(product.name)}`}
+            to={`/product/${formatProductNameUrl(product.name)}`}
+            state={{ productId: product._id }}
             className="h-[320px] sm:h-[480px] p-1 border border-gray-100"
         >
             <div

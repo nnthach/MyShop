@@ -1,3 +1,6 @@
+import Cookies from 'js-cookie';
+import { getCartByIdAPI } from '~/service/cartService';
+
 const { createContext, useState, useEffect } = require('react');
 
 export const SideBarContext = createContext();
@@ -5,6 +8,26 @@ export const SideBarContext = createContext();
 export const SideBarProvider = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [type, setType] = useState('');
+    const [productCartData, setProductCartData] = useState([]);
+    const userId = Cookies.get('userId');
+
+    const handleGetCartByUserId = async (userId, type) => {
+        if (userId && type === 'Cart') {
+            try {
+                const res = await getCartByIdAPI(userId);
+
+                console.log('get cart res', res);
+                setProductCartData(res.data.products);
+            } catch (error) {
+                console.log(error);
+                setProductCartData([]);
+            }
+        }
+    };
+
+    useEffect(() => {
+        handleGetCartByUserId(userId, 'Cart');
+    }, []);
 
     useEffect(() => {
         if (isOpen) {
@@ -18,6 +41,6 @@ export const SideBarProvider = ({ children }) => {
         };
     }, [isOpen]);
 
-    const value = { isOpen, setIsOpen, type, setType };
+    const value = { isOpen, setIsOpen, type, setType, handleGetCartByUserId, productCartData };
     return <SideBarContext.Provider value={value}>{children}</SideBarContext.Provider>;
 };
