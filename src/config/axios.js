@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { refreshTokenAPI } from '~/service/authService';
 
 const api = axios.create({
     baseURL: 'http://localhost:4000/v1',
@@ -34,9 +35,34 @@ api.interceptors.response.use(
         // Do something with response data
         return response;
     },
-    function (error) {
+    async function (error) {
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
+
+        const originalRequest = error.config;
+
+        if (error.response.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
+            const refreshToken = Cookies.get('refreshToken');
+
+            if (!refreshToken) return Promise.reject(error);
+
+            try {
+                const res = await refreshTokenAPI({ refreshToken });
+
+                const newAccessToken = res.data.accessToken;
+
+                Cookies.set('accessToken', newAccessToken);
+
+                originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+
+                return api(originalRequest);
+            } catch (error) {
+                return Promise.reject(error);
+            }
+        }
+
+        console.log('res error', error);
         return Promise.reject(error);
     },
 );
