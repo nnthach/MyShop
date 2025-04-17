@@ -52,7 +52,6 @@ export const ProductsProvider = ({ children }) => {
             };
 
             const res = await getProductListAPI(convertData);
-            console.log('product list', res);
             setAllProductData(res.data);
         } catch (error) {
             console.log(error);

@@ -7,7 +7,7 @@ import { loginAPI, registerAPI } from '~/service/authService';
 
 function AccountContent() {
     const { userId, handleLogout } = useContext(AuthContext);
-    const { setIsOpen } = useContext(SideBarContext);
+    const { setIsOpen, handleGetCartByUserId } = useContext(SideBarContext);
     const [isLogin, setIsLogin] = useState(true);
     const initialFormData = {
         email: '',
@@ -34,8 +34,6 @@ function AccountContent() {
                 password: formData.password,
             };
 
-            console.log('login data', loginData);
-
             try {
                 const res = await loginAPI(loginData);
                 const { _id, accessToken, refreshToken } = res.data;
@@ -45,6 +43,8 @@ function AccountContent() {
                 Cookies.set('accessToken', accessToken);
                 Cookies.set('refreshToken', refreshToken);
                 Cookies.set('userId', _id);
+
+                handleGetCartByUserId(_id, 'Cart');
 
                 setIsOpen(false);
             } catch (error) {
@@ -59,11 +59,9 @@ function AccountContent() {
                 confirm_password: formData.confirm_password,
                 password: formData.password,
             };
-            console.log('register data', registerData);
             try {
                 const res = await registerAPI(registerData);
-                console.log('register res', res);
-
+                
                 toast.success('Register successfully!');
 
                 setIsLogin(true);

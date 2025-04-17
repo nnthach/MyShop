@@ -8,7 +8,6 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [authData, setAuthData] = useState(null);
     const [userId, setUserId] = useState(Cookies.get('userId'));
-    console.log('authdata', authData);
 
     const handleLogout = () => {
         Cookies.remove('accessToken');
@@ -20,11 +19,9 @@ export const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        console.log('userId', userId);
         if (userId) {
             getUserInfoAPI(userId)
                 .then((res) => {
-                    console.log(res);
                     setAuthData(res.data);
                 })
                 .catch((e) => {

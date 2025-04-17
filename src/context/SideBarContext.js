@@ -16,7 +16,6 @@ export const SideBarProvider = ({ children }) => {
             try {
                 const res = await getCartByIdAPI(userId);
 
-                console.log('get cart res', res);
                 setProductCartData(res.data.products);
             } catch (error) {
                 console.log(error);

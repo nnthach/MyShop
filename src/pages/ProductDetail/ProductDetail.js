@@ -68,10 +68,8 @@ function ProductDetail() {
 
         if (userId) {
             try {
-                console.log('data add cart', convertFormDataAddCart);
                 const res = await addToCartAPI(convertFormDataAddCart);
 
-                console.log(res);
                 handleGetCartByUserId(userId,'Cart')
                 toast.success(res.data.msg);
                 setType('Cart');
