@@ -3,7 +3,7 @@ import { TbEaseInOutControlPoints } from 'react-icons/tb';
 import { useContext, useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination/Pagination';
 import FilterMenu from './FilterMenu/FilterMenu';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ProductsContext } from '~/context/ProductsContext';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
 import ProductCard from '~/components/ProductCard/ProductCard';
@@ -15,6 +15,8 @@ function Product() {
     const productsPerPage = 16;
     const { filterData, setFilterData, initialData, handleGetAllProduct, isLoading, allProductData } =
         useContext(ProductsContext);
+
+    const navigate = useNavigate();
 
     const handleOpenFilter = () => {
         setOpenFilter((openFilter) => !openFilter);
@@ -83,7 +85,9 @@ function Product() {
                     }`}
                 >
                     <div className="flex justify-between items-center text-[14px] sm:text-[20px]">
-                        <p>Home / All Products</p>
+                        <p>
+                            <span className='cursor-pointer text-gray-400' onClick={() => navigate('/')}>Home</span> / All Products
+                        </p>
 
                         <button
                             onClick={handleOpenFilter}

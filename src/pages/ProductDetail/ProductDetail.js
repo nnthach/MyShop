@@ -1,22 +1,22 @@
 import { useLocation } from 'react-router-dom';
 import { FiMinus, FiPlus } from 'react-icons/fi';
-import { IoIosArrowForward } from 'react-icons/io';
 import { useContext, useEffect, useState } from 'react';
 import './ProductDetail.css';
-import NotiAdded from './NotiAdded/NotiAdded';
+import NotiAdded from './components/NotiAdded/NotiAdded';
 import { getProductByIdAPI } from '~/service/productService';
 import { formatName, formatPrice } from '~/utils/format';
 import { addToCartAPI } from '~/service/cartService';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import { SideBarContext } from '~/context/SideBarContext';
+import ProductDetailFooter from '~/pages/ProductDetail/components/ProductDetailFooter/ProductDetailFooter';
+import ProductDetailImage from '~/pages/ProductDetail/components/ProductDetailImage/ProductDetailImage';
 
 function ProductDetail() {
     const location = useLocation();
     const productId = location.state?.productId;
     const userId = Cookies.get('userId');
     const { setIsOpen, setType, handleGetCartByUserId } = useContext(SideBarContext);
-    const [isReadDes, setIsReadDes] = useState(false);
     const [productDetailData, setProductDetailData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [formAddCartData, setFormAddCartData] = useState({
@@ -45,10 +45,6 @@ function ProductDetail() {
         handleGetProductById();
     }, [productId]);
 
-    const toggleReadDes = () => {
-        setIsReadDes((prev) => !prev);
-    };
-
     const handleAddToCart = async () => {
         if (!formAddCartData.size) {
             return toast.error('Please choose size');
@@ -70,11 +66,10 @@ function ProductDetail() {
             try {
                 const res = await addToCartAPI(convertFormDataAddCart);
 
-                handleGetCartByUserId(userId,'Cart')
+                handleGetCartByUserId(userId, 'Cart');
                 toast.success(res.data.msg);
                 setType('Cart');
                 setIsOpen(true);
-                
             } catch (error) {
                 console.log(error);
             }
@@ -94,22 +89,7 @@ function ProductDetail() {
                     <div>
                         <div className="grid grid-cols-1 sm:grid-cols-2">
                             {/* IMAGE WRAP  */}
-                            <div className=" bg-white sm:bg-red-400 border-r border-gray-200">
-                                <div className="slider-container h-[50vh] w-full sm:h-full sm:flex-col sm:overflow-y-auto">
-                                    {productDetailData.images.map((image, index) => (
-                                        <div
-                                            key={index}
-                                            className="slider-item min-w-[100%] sm:w-full bg-gray-300 sm:min-h-[300px] scroll-"
-                                        >
-                                            <img
-                                                className="h-full w-full object-cover"
-                                                src={image}
-                                                alt={`product-${index}`}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                            <ProductDetailImage productDetailData={productDetailData} />
 
                             {/* Order and Information */}
                             <div className="sticky top-0 self-start p-[24px] sm:px-[200px] sm:pt-[120px] sm:pb-[50px] min-h-[100vh] bg-white">
@@ -222,49 +202,8 @@ function ProductDetail() {
                                         </button>
                                     </form>
 
-                                    {/* Description */}
-                                    <div className="w-full overflow-hidden relative mt-5">
-                                        <div
-                                            className={`relative transition-all duration-500 ease-in-out pb-[10px] ${
-                                                isReadDes ? 'max-h-none opacity-100' : 'max-h-[120px] opacity-55'
-                                            }`}
-                                        >
-                                            <p className="text-justify">{productDetailData.description}</p>
-                                            <br />
-                                            <ul className="list-disc pl-6">
-                                                <li>Light Blue Washes</li>
-                                                <li>Denim 14.5 OZ</li>
-                                                <li>Made in Viet Nam</li>
-                                            </ul>
-                                        </div>
-
-                                        {!isReadDes && (
-                                            <div
-                                                className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-white to-transparent"
-                                                style={{
-                                                    pointerEvents: 'none',
-                                                }}
-                                            />
-                                        )}
-                                    </div>
-
-                                    <button className="text-left mt-2 pb-5 border-b border-gray-200 w-full">
-                                        <span onClick={toggleReadDes} className="cursor-pointer border-b border-black ">
-                                            {!isReadDes ? 'Read more' : 'Read less'}
-                                        </span>
-                                    </button>
-
-                                    {/* Policy */}
-                                    <>
-                                        <div className="flex items-center justify-between py-5 border-b border-gray-200">
-                                            <p>Payment Policy</p>
-                                            <IoIosArrowForward className="cursor-pointer" onClick={() => {}} />
-                                        </div>
-                                        <div className="flex items-center justify-between py-5 border-b border-gray-200">
-                                            <p>Delivery & Return Policy</p>
-                                            <IoIosArrowForward className="cursor-pointer" onClick={() => {}} />
-                                        </div>
-                                    </>
+                                    {/*Description and policy */}
+                                    <ProductDetailFooter productDetailData={productDetailData} />
                                 </div>
                             </div>
                         </div>
