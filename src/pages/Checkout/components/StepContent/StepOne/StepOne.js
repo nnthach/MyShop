@@ -1,12 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import FormInputCustom from '~/components/FormInputCustom/FormInputCustom';
 
 function StepOne() {
     const ADDRESS_BASE_URL = 'https://countriesnow.space/api/v0.1';
-
-    const navigate = useNavigate();
 
     const [selectedCountry, setSelectedCountry] = useState('');
     const [selectedState, setSelectedState] = useState('');
@@ -30,6 +27,7 @@ function StepOne() {
         email: '',
         note: '',
     });
+
     const detailHomeData = [
         {
             value: 'Home',
