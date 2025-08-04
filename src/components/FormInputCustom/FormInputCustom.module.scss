@@ -1,0 +1,39 @@
+@import '~/styles/mixin.module.scss';
+@import '~/styles/variable.module.scss';
+
+.wrap {
+    @include flexBoxStyle(none, none, 5px);
+    flex-direction: column;
+    width: 100%;
+
+    label {
+        color: $third-color;
+        font-size: 14px;
+    }
+
+    input,
+    select,
+    textarea {
+        height: 37px;
+        padding: 0 10px;
+        border: 1px solid $light-grey-color-two;
+        outline: none;
+
+        &:focus {
+            border: 1px solid $secondary-color;
+        }
+    }
+    .error {
+        border: 1px solid red;
+    }
+    
+    textarea {
+        height: 100px;
+        padding: 5px 10px;
+    }
+
+    p {
+        color: red;
+        font-size: 12px;
+    }
+}

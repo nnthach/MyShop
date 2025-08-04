@@ -1,9 +1,5 @@
-import { AiOutlineShoppingCart, AiOutlineUser, AiOutlineSearch, AiOutlineClose } from 'react-icons/ai';
-import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { AiOutlineShoppingCart, AiOutlineUser, AiOutlineSearch } from 'react-icons/ai';
 import { useContext, useState } from 'react';
-import { boxShadow } from '~/components/Styles/styles';
-import PANT from '~/assets/img/pant.webp';
-import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 import { SideBarContext } from '~/context/SideBarContext';
 

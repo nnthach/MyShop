@@ -1,16 +1,33 @@
-function ProductCardHorizontal({ product }) {
+function ProductCardHorizontal({ product, handleUpdateProductQuantity }) {
     return (
         <div className="flex gap-3 bg-gray-100 p-1 align-center">
-            <img
-                src="https://product.hstatic.net/200000320785/product/artboard_3_copy_d321a20018c943cd95c2023456b07aa4.jpg"
-                className="w-16 h-16"
-            />
+            <img src={product.images[0]} className="w-16 h-16" />
 
             <div className="flex flex-col gap-1">
-                <p className="text-s">{product.name}</p>
+                <p className="text-s">
+                    {product.name} ({product.size})
+                </p>
                 <p className="text-xs">{product.price} VND</p>
+                <div>
+                    <p className="text-xs">
+                        Qty{' '}
+                        <select
+                            className="border border-gray-300 hover:border-black"
+                            value={product.quantity}
+                            onChange={(e) =>
+                                handleUpdateProductQuantity(product.productId, product.size, parseInt(e.target.value))
+                            }
+                        >
+                            {[...Array(10)].map((_, i) => (
+                                <option value={i + 1} key={i + 1}>
+                                    {i + 1}
+                                </option>
+                            ))}
+                        </select>
+                    </p>
+                </div>
                 <p className="text-xs">
-                    Size: {product.size} - Qty: {product.quantity}
+                    Subtotal: <strong>{product.price * product.quantity}</strong>
                 </p>
             </div>
 

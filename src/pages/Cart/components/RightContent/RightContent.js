@@ -2,27 +2,31 @@ import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { CiCreditCard1, CiDeliveryTruck, CiGift } from 'react-icons/ci';
 import { MdCurrencyExchange } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { SideBarContext } from '~/context/SideBarContext';
 
 function RightContent({ setSlideMenuHeading, handleOpenSlideBar }) {
+    const { productCartData } = useContext(SideBarContext);
+    console.log('product cart data', productCartData);
+
+    const totalPrice = productCartData.reduce((acc, item) => {
+        return acc + item.price * item.quantity;
+    }, 0);
     return (
-        <div className="bg-white w-full sm:min-h-[500px] ">
+        <div className="bg-white w-full sm:min-h-[500px]">
             <div className="sm:py-10 sm:px-12 p-6">
                 <div className="font-medium">
                     <div className="flex justify-between text-center mb-2">
                         <p>Subtotal</p>
-                        <p>1000000 VND</p>
-                    </div>
-                    <div className="flex justify-between text-center mb-2">
-                        <p>Shipping</p>
-                        <p>10000000 VND</p>
+                        <p>{totalPrice} VND</p>
                     </div>
                     <div className="flex justify-between text-center">
                         <p>Tax</p>
-                        <p>10000000 VND</p>
+                        <p>0 VND</p>
                     </div>
                     <div className="flex justify-between text-center text-[20px] my-6">
                         <p>Total</p>
-                        <p>10000000 VND</p>
+                        <p>{totalPrice} VND</p>
                     </div>
                 </div>
 
@@ -67,6 +71,7 @@ function RightContent({ setSlideMenuHeading, handleOpenSlideBar }) {
                     </div>
                     <IoIosArrowForward />
                 </div>
+
                 <div
                     onClick={() => {
                         setSlideMenuHeading('Return & Exchanges');

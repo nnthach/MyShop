@@ -1,17 +1,13 @@
 import { useState } from 'react';
 import { FaArrowLeftLong } from 'react-icons/fa6';
-import FirstStep from './components/FirstStep/FirstStep';
-import SecondStep from './components/SecondStep/SecondStep';
-import ThridStep from './components/ThridStep/ThridStep';
 import RightCheckout from './components/RightCheckout/RightCheckout';
 import FilterMenu from './components/FilterMenu/FilterMenu';
+import HeaderStep from '~/pages/Checkout/components/HeaderStep/HeaderStep';
+import StepContent from '~/pages/Checkout/components/StepContent/StepContent';
 
 function Checkout() {
     const [slideMenuHeading, setSlideMenuHeading] = useState('');
     const [openSlideBar, setOpenSlideBar] = useState(false);
-    const [step, setStep] = useState(1);
-    const [doneStep, setDoneStep] = useState([2, 3]);
-    const [updateStep, setUpdateStep] = useState(0);
 
     const handleOpenSlideBar = () => {
         setOpenSlideBar((prev) => !prev);
@@ -25,14 +21,9 @@ function Checkout() {
                 <div className="w-full min-h-[1000px] grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 ">
                     {/*Left */}
                     <div className="sm:col-span-2 space-y-4">
-                        {/*First Step */}
-                        <FirstStep step={step} setStep={setStep} doneStep={doneStep} setDoneStep={setDoneStep} />
-
-                        {/*Second Step */}
-                        <SecondStep step={step} setStep={setStep} doneStep={doneStep} setDoneStep={setDoneStep} />
-
-                        {/*Thrid Step */}
-                        <ThridStep step={step} setStep={setStep} doneStep={doneStep} setDoneStep={setDoneStep} />
+                        {/*Header step */}
+                        <HeaderStep />
+                        <StepContent />
                     </div>
                     {/*Right */}
                     <RightCheckout setSlideMenuHeading={setSlideMenuHeading} handleOpenSlideBar={handleOpenSlideBar} />

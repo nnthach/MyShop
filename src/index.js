@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { SideBarProvider } from '~/context/SideBarContext';
 import { AuthProvider } from '~/context/AuthContext';
 import { ProductsProvider } from '~/context/ProductsContext';
+import { StepperCheckoutProvider } from '~/context/StepperCheckoutContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,9 +15,11 @@ root.render(
         <ProductsProvider>
             <AuthProvider>
                 <SideBarProvider>
-                    <BrowserRouter>
-                        <App />
-                    </BrowserRouter>
+                    <StepperCheckoutProvider>
+                        <BrowserRouter>
+                            <App />
+                        </BrowserRouter>
+                    </StepperCheckoutProvider>
                 </SideBarProvider>
             </AuthProvider>
         </ProductsProvider>

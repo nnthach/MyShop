@@ -2,39 +2,53 @@ import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { CiCreditCard1, CiDeliveryTruck, CiGift } from 'react-icons/ci';
 import { MdCurrencyExchange } from 'react-icons/md';
 import { IMAGES_PRODUCT } from '~/assets/img';
+import { useContext } from 'react';
+import { SideBarContext } from '~/context/SideBarContext';
 
 function RightCheckout({ setSlideMenuHeading, handleOpenSlideBar }) {
+    const { productCartData } = useContext(SideBarContext);
+
+    const total = productCartData.reduce((acc, item) => {
+        return acc + item.price * item.quantity;
+    }, 0);
+
     return (
         <div className="bg-white pb-0 p-6 sm:pb-8 sm:p-8">
             <div className="flex justify-between items-center">
                 <span className="font-medium text-[18px] sm:text-[20px]">My Shopping Cart</span>
                 <span className="text-[12px] sm:text-[14px] underline cursor-pointer">Modify the Selection</span>
             </div>
-            <div className="flex items-center mt-8 pb-4 border-b border-gray-300">
-                <div className="bg-gray-200 w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] border mr-5">
-                    <img src={IMAGES_PRODUCT.jacketDenimBlue1_1} className="w-auto h-full object-cover" />
-                </div>
-                <div className="text-[14px] sm:text-4">
-                    <p>Maverik 2 In 1 Denim Jacket</p>
-                    <p>800.000 VND</p>
-                </div>
+            <div className="flex flex-col max-h-[400px] overflow-y-auto custom-scrollbar gap-2 mt-8 pb-4 border-b border-gray-300">
+                {productCartData.map((product) => (
+                    <div key={product.productId} className="flex items-start">
+                        <div className="bg-gray-200 w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] border mr-3">
+                            <img src={product.images[0]} className="w-auto h-full object-cover" />
+                        </div>
+                        <div className="text-[14px] sm:text-4">
+                            <p className="text-base font-medium">{product.name}</p>
+                            <p>{product.price} VND</p>
+                            <p>Size: {product.size}</p>
+                            <p>Qty: {product.quantity}</p>
+                        </div>
+                    </div>
+                ))}
             </div>
             <div className="text-[14px] sm:text-4 font-medium mt-4">
                 <div className="flex justify-between text-center mb-2">
                     <p>Subtotal</p>
-                    <p>1000000 VND</p>
+                    <p>{total} VND</p>
                 </div>
                 <div className="flex justify-between text-center mb-2">
                     <p>Shipping</p>
-                    <p>10000000 VND</p>
+                    <p>0 VND</p>
                 </div>
                 <div className="flex justify-between text-center">
                     <p>Tax</p>
-                    <p>10000000 VND</p>
+                    <p>0 VND</p>
                 </div>
                 <div className="flex justify-between text-center text-[18px] sm:text-[20px] my-6">
                     <p>Total</p>
-                    <p>10000000 VND</p>
+                    <p>{total} VND</p>
                 </div>
             </div>
             <div className="border-t border-gray-200">
