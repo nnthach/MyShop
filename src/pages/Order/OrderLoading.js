@@ -46,7 +46,11 @@ function OrderLoading() {
         checkPayment();
     }, [searchParams]);
 
-    return <div className="p-6 text-center">ALO ALO</div>;
+    return (
+        <div className="bg-gray-50 flex flex-col items-center justify-center h-[90vh] space-y-5">
+            <p>loading</p>
+        </div>
+    );
 }
 
 export default OrderLoading;

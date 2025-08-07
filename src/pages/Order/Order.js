@@ -6,9 +6,7 @@ function Order() {
     const location = useLocation();
     const { orderId, message } = location.state || {};
     return (
-        <div className="p-6">
-            <h1 className="text-xl font-bold mb-4">Kết quả đặt hàng</h1>
-
+        <div className="h-[90vh]">
             {message === 'Order success' ? <OrderSuccess orderId={orderId} /> : <OrderFail />}
         </div>
     );
