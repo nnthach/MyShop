@@ -1,11 +1,34 @@
 import { useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { StepperCheckoutContext } from '~/context/StepperCheckoutContext';
+import { createPaymentVNPAYAPI, updateOrderAPI } from '~/service/orderService';
 
 function StepTwo() {
     const { setMethodPayment, setCurrentStep } = useContext(StepperCheckoutContext);
-    const handleChooseMethod = (name) => {
-        setMethodPayment(name);
-        setCurrentStep(3);
+    const navigate = useNavigate();
+    const { search } = useLocation();
+    const queryParams = new URLSearchParams(search);
+
+    const id = queryParams.get('id');
+    const total = queryParams.get('total');
+
+    const handleChooseMethod = async (name) => {
+        try {
+            const res = await updateOrderAPI({ paymentMethod: name }, id);
+            console.log('update order method res', res);
+            setMethodPayment(name);
+
+            if (name == 'visa') {
+                const urlPaymentVNPAY = await createPaymentVNPAYAPI({ orderId: id, totalAmount: total });
+                console.log('urlPaymentVNPAY', urlPaymentVNPAY);
+                window.location.href = urlPaymentVNPAY.data.data; 
+            } else {
+                setCurrentStep(3);
+                navigate(`/checkout?id=${id}&total=${total}&payment_method=${name}`);
+            }
+        } catch (error) {
+            console.log('update payment method err', error);
+        }
     };
     return (
         <div className="w-full min-h-[100px] text-center bg-white p-5">

@@ -2,6 +2,8 @@ import Admin from '~/pages/Admin/Admin';
 import Cart from '~/pages/Cart/Cart';
 import Checkout from '~/pages/Checkout/Checkout';
 import Home from '~/pages/Home/Home';
+import Order from '~/pages/Order/Order';
+import OrderLoading from '~/pages/Order/OrderLoading';
 import Product from '~/pages/Product/Product';
 import ProductDetail from '~/pages/ProductDetail/ProductDetail';
 
@@ -25,6 +27,14 @@ const publicRoutes = [
     {
         path: '/checkout',
         component: Checkout,
+    },
+    {
+        path: '/order/loading',
+        component: OrderLoading,
+    },
+    {
+        path: '/order',
+        component: Order,
     },
 ];
 

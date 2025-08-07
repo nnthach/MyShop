@@ -1,9 +1,16 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import FormInputCustom from '~/components/FormInputCustom/FormInputCustom';
+import { StepperCheckoutContext } from '~/context/StepperCheckoutContext';
+import { createOrderAPI } from '~/service/orderService';
 
 function StepOne() {
     const ADDRESS_BASE_URL = 'https://countriesnow.space/api/v0.1';
+
+    const navigate = useNavigate();
+
+    const { setCurrentStep } = useContext(StepperCheckoutContext);
 
     const [selectedCountry, setSelectedCountry] = useState('');
     const [selectedState, setSelectedState] = useState('');
@@ -58,8 +65,12 @@ function StepOne() {
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
-            //
+            //create order
             console.log('data delivery', deliveryForm);
+            const res = await createOrderAPI(deliveryForm);
+            console.log('create order res', res.data);
+            setCurrentStep(2);
+            navigate(`/checkout?id=${res?.data?.data._id}&total=${res.data.data.totalAmount}`);
         } catch (error) {
             console.log('create order err', error);
         }

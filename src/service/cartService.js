@@ -6,6 +6,12 @@ export const addToCartAPI = (body) => {
     return res;
 };
 
+export const updateCartAPI = (body) => {
+    const res = api.put('/cart', body);
+
+    return res;
+};
+
 export const getCartByIdAPI = (userId) => {
     const res = api.get(`/cart/${userId}`);
 

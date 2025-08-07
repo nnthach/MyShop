@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductCardHorizontal from '~/components/ProductCardHorizontal/ProductCardHorizontal';
 import { SideBarContext } from '~/context/SideBarContext';
-import { addToCartAPI } from '~/service/cartService';
+import { addToCartAPI, updateCartAPI } from '~/service/cartService';
 
 function CartContent() {
     const { productCartData, setIsOpen, handleGetCartByUserId } = useContext(SideBarContext);
@@ -30,7 +30,7 @@ function CartContent() {
         };
         try {
             console.log('update pro qty data', updateData);
-            const res = await addToCartAPI(updateData);
+            const res = await updateCartAPI(updateData);
             console.log('update pro qty res', res);
 
             handleGetCartByUserId(userId, 'Cart');
