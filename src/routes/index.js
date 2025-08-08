@@ -1,47 +1,44 @@
-import Admin from '~/pages/Admin/Admin';
-import Cart from '~/pages/Cart/Cart';
-import Checkout from '~/pages/Checkout/Checkout';
-import Home from '~/pages/Home/Home';
-import Order from '~/pages/Order/Order';
-import OrderLoading from '~/pages/Order/OrderLoading';
-import Product from '~/pages/Product/Product';
-import ProductDetail from '~/pages/ProductDetail/ProductDetail';
+import { lazy } from 'react';
 
 const publicRoutes = [
     {
         path: '/',
-        component: Home,
+        component: lazy(() => import('~/pages/Home/Home')),
     },
     {
         path: '/products/:category/*',
-        component: Product,
+        component: lazy(() => import('~/pages/Product/Product')),
     },
     {
         path: '/product/:productName',
-        component: ProductDetail,
+        component: lazy(() => import('~/pages/ProductDetail/ProductDetail')),
     },
     {
         path: '/cart',
-        component: Cart,
+        component: lazy(() => import('~/pages/Cart/Cart')),
     },
     {
         path: '/checkout',
-        component: Checkout,
+        component: lazy(() => import('~/pages/Checkout/Checkout')),
     },
     {
         path: '/order/loading',
-        component: OrderLoading,
+        component: lazy(() => import('~/pages/Order/OrderLoading')),
     },
     {
         path: '/order',
-        component: Order,
+        component: lazy(() => import('~/pages/Order/Order')),
+    },
+    {
+        path: '/account',
+        component: lazy(() => import('~/pages/MyAccount/MyAccount')),
     },
 ];
 
 const privateRoutes = [
     {
         path: '/admin',
-        component: Admin,
+        component: lazy(() => import('~/pages/Admin/Admin')),
         layout: null,
     },
 ];

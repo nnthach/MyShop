@@ -81,18 +81,18 @@ function OrderSuccess({ orderId }) {
                     <h5 className="font-medium text-xl mb-4">Delivery</h5>
                     <div className="space-y-2">
                         <p>
-                            <strong>Fullname:</strong> {orderInfoData.lastName} {orderInfoData.firstName}
+                            <strong>Fullname:</strong> {orderInfoData?.lastName} {orderInfoData?.firstName}
                         </p>
                         <p>
-                            <strong>Address:</strong> {orderInfoData.streetAddress}, {orderInfoData.city},{' '}
-                            {orderInfoData.state}, {orderInfoData.country}.
+                            <strong>Address:</strong> {orderInfoData?.streetAddress}, {orderInfoData?.city},{' '}
+                            {orderInfoData?.state}, {orderInfoData?.country}.
                         </p>
                         <p>
                             <strong>Phone: </strong>
-                            {orderInfoData.phone}
+                            {orderInfoData?.phone}
                         </p>
                         <p>
-                            <strong>Email:</strong> {orderInfoData.email}
+                            <strong>Email:</strong> {orderInfoData?.email}
                         </p>
                     </div>
                 </div>

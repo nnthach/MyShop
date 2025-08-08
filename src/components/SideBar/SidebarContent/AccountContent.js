@@ -4,9 +4,11 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '~/context/AuthContext';
 import { SideBarContext } from '~/context/SideBarContext';
 import { loginAPI, registerAPI } from '~/service/authService';
+import { FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 function AccountContent() {
-    const { userId, handleLogout } = useContext(AuthContext);
+    const { userId, handleLogout, authData } = useContext(AuthContext);
     const { setIsOpen, handleGetCartByUserId } = useContext(SideBarContext);
     const [isLogin, setIsLogin] = useState(true);
     const initialFormData = {
@@ -16,6 +18,8 @@ function AccountContent() {
         confirm_password: '',
     };
     const [formData, setFormData] = useState(initialFormData);
+
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const { id, value } = e.target;
@@ -61,7 +65,7 @@ function AccountContent() {
             };
             try {
                 const res = await registerAPI(registerData);
-                
+
                 toast.success('Register successfully!');
 
                 setIsLogin(true);
@@ -80,10 +84,23 @@ function AccountContent() {
 
             {userId ? (
                 <div>
-                    <p>My Account</p>
-                    <p className="cursor-pointer" onClick={handleLogout}>
-                        Sign Out
-                    </p>
+                    <div
+                        onClick={() => {
+                            navigate('/account');
+                            setIsOpen(false);
+                        }}
+                        className="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-200 rounded-md"
+                    >
+                        <FaUser />
+                        <p className="underline">{authData.email}</p>
+                    </div>
+                    <div
+                        className="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-200 rounded-md"
+                        onClick={handleLogout}
+                    >
+                        <FaSignOutAlt />
+                        <p>Sign Out</p>
+                    </div>
                 </div>
             ) : (
                 <form onSubmit={handleSubmitForm} className="flex flex-col gap-y-2">

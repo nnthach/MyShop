@@ -18,8 +18,14 @@ export const getOrderByIdAPI = async (id) => {
     return res;
 };
 
+export const getOrderOfUserAPI = async () => {
+    const res = api.get(`/order/my-orders`);
+
+    return res;
+};
+
 export const checkPaymentVNPAYAPI = async (params) => {
-    const res = api.get(`/order/check-payment-vnpay`,{params});
+    const res = api.get(`/order/check-payment-vnpay`, { params });
 
     return res;
 };
