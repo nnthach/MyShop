@@ -74,7 +74,13 @@ function CartContent() {
                         >
                             Go to Cart
                         </button>
-                        <button className="border border-black w-[50%] bg-black text-white  hover:bg-white hover:text-black duration-300 ease-in-out">
+                        <button
+                            onClick={() => {
+                                navigate('/checkout');
+                                setIsOpen(false);
+                            }}
+                            className="border border-black w-[50%] bg-black text-white  hover:bg-white hover:text-black duration-300 ease-in-out"
+                        >
                             Go to Payment
                         </button>
                     </div>

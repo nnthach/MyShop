@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { FaArrowLeftLong } from 'react-icons/fa6';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { StepperCheckoutContext } from '~/context/StepperCheckoutContext';
 import { createPaymentVNPAYAPI, updateOrderAPI } from '~/service/orderService';
@@ -21,7 +22,7 @@ function StepTwo() {
             if (name == 'visa') {
                 const urlPaymentVNPAY = await createPaymentVNPAYAPI({ orderId: id, totalAmount: total });
                 console.log('urlPaymentVNPAY', urlPaymentVNPAY);
-                window.location.href = urlPaymentVNPAY.data.data; 
+                window.location.href = urlPaymentVNPAY.data.data;
             } else {
                 setCurrentStep(3);
                 navigate(`/checkout?id=${id}&total=${total}&payment_method=${name}`);
@@ -32,6 +33,10 @@ function StepTwo() {
     };
     return (
         <div className="w-full min-h-[100px] text-center bg-white p-5">
+            <div className="flex items-center gap-2 mb-4">
+                <FaArrowLeftLong className="cursor-pointer" />
+                <p className="text-left text-sm underline cursor-pointer">Change Delivery Information</p>
+            </div>
             <h3 className="text-xl font-bold">How would you like to pay?</h3>
             <div className="flex items-center justify-center gap-3 mt-5">
                 <div

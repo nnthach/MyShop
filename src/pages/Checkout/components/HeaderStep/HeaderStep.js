@@ -27,9 +27,9 @@ function HeaderStep() {
                         <div
                             key={index}
                             className="flex items-center gap-[10px]"
-                            onClick={() => {
-                                setCurrentStep(item.number);
-                            }}
+                            // onClick={() => {
+                            //     setCurrentStep(item.number);
+                            // }}
                         >
                             <span
                                 className={`cursor-pointer flex items-center justify-center w-7 h-7 font-semibold rounded-full border

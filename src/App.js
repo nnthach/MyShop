@@ -4,10 +4,12 @@ import DefaultLayout from './components/Layout/DefaultLayout/DefaultLayout';
 import { Fragment } from 'react';
 import SideBar from '~/components/SideBar/SideBar';
 import { ToastContainer } from 'react-toastify';
+import ScrollToTop from '~/components/ScrollToTop/ScrollToTop';
 
 function App() {
     return (
         <div>
+            <ScrollToTop />
             <ToastContainer />
             <SideBar />
             <Routes>

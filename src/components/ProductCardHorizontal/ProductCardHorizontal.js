@@ -1,7 +1,7 @@
 function ProductCardHorizontal({ product, handleUpdateProductQuantity }) {
     return (
         <div className="flex gap-3 bg-gray-100 p-1 align-center">
-            <img src={product.images[0]} className="w-16 h-16" />
+            <img src={product?.images?.[0] || '/default-image.jpg'} className="w-16 h-16" />
 
             <div className="flex flex-col gap-1">
                 <p className="text-s">

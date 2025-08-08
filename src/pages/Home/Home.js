@@ -16,57 +16,6 @@ function Home() {
     const bannerData = [IMAGES.banner1, IMAGES.banner2, IMAGES.banner3];
     const { allProductData } = useContext(ProductsContext);
 
-    const newArrivalData = [
-        {
-            name: 'Maverik 2 in 1 trouser grey blue',
-            price: 820000,
-            category: 'pants',
-            image: IMAGES.pants,
-        },
-        {
-            name: 'Trouser grey blue',
-            price: 820000,
-            category: 'pants',
-            image: IMAGES.pants,
-        },
-        {
-            name: 'Maverik 2 in 1 trouser grey blue blue blue blue blue',
-            price: 820000,
-            category: 'pants',
-            image: IMAGES.pants,
-        },
-        {
-            name: 'Trouser grey blue',
-            price: 820000,
-            category: 'pants',
-            image: IMAGES.pants,
-        },
-        {
-            name: 'Maverik 2 in 1 trouser grey blue',
-            price: 820000,
-            category: 'pants',
-            image: IMAGES.pants,
-        },
-        {
-            name: 'Maverik 2 in 1 trouser grey blue',
-            price: 820000,
-            category: 'pants',
-            image: IMAGES.pants,
-        },
-        {
-            name: 'Maverik 2 in 1 trouser grey blue',
-            price: 820000,
-            category: 'pants',
-            image: IMAGES.pants,
-        },
-        {
-            name: 'Maverik 2 in 1 trouser grey blue',
-            price: 820000,
-            category: 'pants',
-            image: IMAGES.pants,
-        },
-    ];
-
     const collectionData = [
         {
             title: 'MAVERIK 4TH ANNIVERSARY',

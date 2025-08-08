@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { StepperCheckoutContext } from '~/context/StepperCheckoutContext';
 import StepOne from '~/pages/Checkout/components/StepContent/StepOne/StepOne';
 import StepThree from '~/pages/Checkout/components/StepContent/StepThree/StepThree';
@@ -6,6 +6,10 @@ import StepTwo from '~/pages/Checkout/components/StepContent/StepTwo/StepTwo';
 
 function StepContent() {
     const { currentStep } = useContext(StepperCheckoutContext);
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentStep]);
 
     const handleRenderContent = () => {
         switch (currentStep) {
