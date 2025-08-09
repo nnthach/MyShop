@@ -1,20 +1,23 @@
-import { MdOutlineDashboard, MdOutlineAttachMoney } from 'react-icons/md';
+import { MdOutlineAttachMoney } from 'react-icons/md';
 import { AiOutlineUser } from 'react-icons/ai';
 import { IoShirtOutline } from 'react-icons/io5';
 import { TbShoppingCartCopy } from 'react-icons/tb';
+import { FaChartBar, FaRegChartBar } from 'react-icons/fa6';
 
-function MenuBar({ setContent }) {
+function MenuBar({ content, setContent }) {
     return (
-        <div className="bg-white border-r border-black p-10">
-            <ul className="text-[20px] space-y-6">
+        <div className="bg-white p-8">
+            <ul className="text-[20px] space-y-4">
                 <li
                     onClick={() => {
                         setContent('Dashboard');
                     }}
-                    className="cursor-pointer flex items-center"
+                    className={`cursor-pointer flex items-center text-[18px] hover:bg-gray-100 p-2 rounded-md ${
+                        content == 'Dashboard' && 'bg-gray-100'
+                    }`}
                 >
-                    <span className="text-[22px] mr-2">
-                        <MdOutlineDashboard />
+                    <span className="mr-2">
+                        <FaRegChartBar />
                     </span>
                     Dashboard
                 </li>
@@ -22,9 +25,11 @@ function MenuBar({ setContent }) {
                     onClick={() => {
                         setContent('Users');
                     }}
-                    className="cursor-pointer flex items-center"
+                    className={`cursor-pointer flex items-center text-[18px] hover:bg-gray-100 p-2 rounded-md ${
+                        content == 'Users' && 'bg-gray-100'
+                    }`}
                 >
-                    <span className="text-[22px] mr-2">
+                    <span className="mr-2">
                         <AiOutlineUser />
                     </span>
                     Users
@@ -33,9 +38,11 @@ function MenuBar({ setContent }) {
                     onClick={() => {
                         setContent('Products');
                     }}
-                    className="cursor-pointer flex items-center"
+                    className={`cursor-pointer flex items-center text-[18px] hover:bg-gray-100 p-2 rounded-md ${
+                        content == 'Products' && 'bg-gray-100'
+                    }`}
                 >
-                    <span className="text-[22px] mr-2">
+                    <span className="mr-2">
                         <IoShirtOutline />
                     </span>
                     Products
@@ -44,9 +51,11 @@ function MenuBar({ setContent }) {
                     onClick={() => {
                         setContent('Orders');
                     }}
-                    className="cursor-pointer flex items-center"
+                    className={`cursor-pointer flex items-center text-[18px] hover:bg-gray-100 p-2 rounded-md ${
+                        content == 'Orders' && 'bg-gray-100'
+                    }`}
                 >
-                    <span className="text-[22px] mr-2">
+                    <span className=" mr-2">
                         <TbShoppingCartCopy />
                     </span>
                     Orders
@@ -55,9 +64,11 @@ function MenuBar({ setContent }) {
                     onClick={() => {
                         setContent('Payment');
                     }}
-                    className="cursor-pointer flex items-center"
+                    className={`cursor-pointer flex items-center text-[18px] hover:bg-gray-100 p-2 rounded-md ${
+                        content == 'Payment' && 'bg-gray-100'
+                    }`}
                 >
-                    <span className="text-[22px] mr-2">
+                    <span className="mr-2">
                         <MdOutlineAttachMoney />
                     </span>
                     Payment

@@ -30,8 +30,8 @@ function Admin() {
         <div className="flex flex-col min-h-[100vh]">
             <Header />
             <div className="grow bg-red-500 w-full grid grid-cols-5">
-                <MenuBar setContent={setContent} />
-                <div className="bg-black col-span-4 p-10">{renderContent(content)}</div>
+                <MenuBar content={content} setContent={setContent} />
+                <div className="bg-gray-100 col-span-4 p-8">{renderContent(content)}</div>
             </div>
         </div>
     );

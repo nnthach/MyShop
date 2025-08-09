@@ -6,6 +6,8 @@ import { SideBarContext } from '~/context/SideBarContext';
 import { loginAPI, registerAPI } from '~/service/authService';
 import { FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { RiAdminFill } from 'react-icons/ri';
+import { FaChalkboardUser } from 'react-icons/fa6';
 
 function AccountContent() {
     const { userId, setUserId, handleLogout, authData } = useContext(AuthContext);
@@ -96,6 +98,19 @@ function AccountContent() {
                         <FaUser />
                         <p className="underline">{authData?.email}</p>
                     </div>
+                    {authData?.role == 'Admin' && (
+                        <div
+                            onClick={() => {
+                                navigate('/admin');
+                                setIsOpen(false);
+                            }}
+                            className="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-200 rounded-md"
+                        >
+                            <FaChalkboardUser />
+                            <p>Admin</p>
+                        </div>
+                    )}
+
                     <div
                         className="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-200 rounded-md"
                         onClick={handleLogout}

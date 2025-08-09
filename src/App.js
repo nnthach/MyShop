@@ -32,7 +32,8 @@ function App() {
                                 path={route.path}
                                 element={
                                     <Layout>
-                                        <ProtectedRoute component={Page} roleList={route.role} />
+                                        {/* <ProtectedRoute component={Page} roleList={route.role} /> */}
+                                        <Page />
                                     </Layout>
                                 }
                             />
@@ -55,7 +56,7 @@ function App() {
                                 path={route.path}
                                 element={
                                     <Layout>
-                                        <ProtectedRoute component={Page} roleList={route.role} />
+                                        <Page />
                                     </Layout>
                                 }
                             />

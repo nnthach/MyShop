@@ -12,6 +12,12 @@ export const createPaymentVNPAYAPI = async (data) => {
     return res;
 };
 
+export const getAllOrderAPI = async () => {
+    const res = api.get(`/order`);
+
+    return res;
+};
+
 export const getOrderByIdAPI = async (id) => {
     const res = api.get(`/order/${id}`);
 
