@@ -8,7 +8,7 @@ import { FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 function AccountContent() {
-    const { userId, handleLogout, authData } = useContext(AuthContext);
+    const { userId, setUserId, handleLogout, authData } = useContext(AuthContext);
     const { setIsOpen, handleGetCartByUserId } = useContext(SideBarContext);
     const [isLogin, setIsLogin] = useState(true);
     const initialFormData = {
@@ -42,15 +42,17 @@ function AccountContent() {
                 const res = await loginAPI(loginData);
                 const { _id, accessToken, refreshToken } = res.data;
 
+                setIsOpen(false);
+
                 toast.success('Login successfully!');
 
                 Cookies.set('accessToken', accessToken);
                 Cookies.set('refreshToken', refreshToken);
                 Cookies.set('userId', _id);
 
-                handleGetCartByUserId(_id, 'Cart');
+                setUserId(_id);
 
-                setIsOpen(false);
+                await handleGetCartByUserId(_id, 'Cart');
             } catch (error) {
                 console.log(error);
                 toast.error('Failed to login!');
@@ -92,7 +94,7 @@ function AccountContent() {
                         className="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-200 rounded-md"
                     >
                         <FaUser />
-                        <p className="underline">{authData.email}</p>
+                        <p className="underline">{authData?.email}</p>
                     </div>
                     <div
                         className="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-200 rounded-md"

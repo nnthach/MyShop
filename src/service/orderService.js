@@ -18,8 +18,8 @@ export const getOrderByIdAPI = async (id) => {
     return res;
 };
 
-export const getOrderOfUserAPI = async () => {
-    const res = api.get(`/order/my-orders`);
+export const getOrderOfUserAPI = async (params) => {
+    const res = api.get(`/order/my-orders`, { params });
 
     return res;
 };

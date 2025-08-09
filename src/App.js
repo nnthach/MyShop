@@ -6,6 +6,7 @@ import SideBar from '~/components/SideBar/SideBar';
 import { ToastContainer } from 'react-toastify';
 import ScrollToTop from '~/components/ScrollToTop/ScrollToTop';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
+import ProtectedRoute from '~/routes/ProtectedRoute';
 
 function App() {
     return (
@@ -31,7 +32,7 @@ function App() {
                                 path={route.path}
                                 element={
                                     <Layout>
-                                        <Page />
+                                        <ProtectedRoute component={Page} roleList={route.role} />
                                     </Layout>
                                 }
                             />
@@ -54,7 +55,7 @@ function App() {
                                 path={route.path}
                                 element={
                                     <Layout>
-                                        <Page />
+                                        <ProtectedRoute component={Page} roleList={route.role} />
                                     </Layout>
                                 }
                             />
