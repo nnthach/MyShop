@@ -24,8 +24,8 @@ export const getUserInfoAPI = async (id) => {
     return res;
 };
 
-export const getUserListAPI = async () => {
-    const res = api.get(`/user/list`);
+export const getUserListAPI = async (params) => {
+    const res = api.get(`/user/list`, { params });
 
     return res;
 };

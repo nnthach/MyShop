@@ -52,7 +52,7 @@ function Dashboard() {
         getAllData();
     }, []);
 
-    // order data chart
+    //================================================== order data chart
     const orderCountByMonth = useMemo(() => {
         const months = Array(12).fill(0);
         orderListData.forEach((order) => {
@@ -101,7 +101,7 @@ function Dashboard() {
     };
     // end order
 
-    // product data chart
+    //==================================================== product data chart
     const productTypeCount = useMemo(() => {
         const counts = {};
         productListData.forEach((product) => {
@@ -139,7 +139,7 @@ function Dashboard() {
     };
     // end product
 
-    // user data chart
+    //==================================================== user data chart
     const userCountByMonth = useMemo(() => {
         const months = Array(12).fill(0);
         userListData.forEach((user) => {
