@@ -208,13 +208,6 @@ function ProductDetail() {
                             </div>
                         </div>
                     </div>
-
-                    {/* Noti Added to Cart
-                    {openAddedProduct ? (
-                        <NotiAdded
-                            
-                        />
-                    ) : null} */}
                 </>
             )}
         </>

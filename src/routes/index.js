@@ -7,7 +7,7 @@ const publicRoutes = [
         role: ['Guest', 'Customer', 'Admin'],
     },
     {
-        path: '/products/:category/*',
+        path: '/products/:type',
         component: lazy(() => import('~/pages/Product/Product')),
         role: ['Guest', 'Customer', 'Admin'],
     },

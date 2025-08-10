@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import AccountContent from '~/components/SideBar/SidebarContent/AccountContent';
 import CartContent from '~/components/SideBar/SidebarContent/CartContent';
-import MenuContent from '~/components/SideBar/SidebarContent/MenuConent';
 import { SideBarContext } from '~/context/SideBarContext';
 
 function SideBar() {
@@ -14,8 +13,6 @@ function SideBar() {
 
     const handleRenderSideBarContent = () => {
         switch (type) {
-            case 'Menu':
-                return <MenuContent />;
             case 'Cart':
                 return <CartContent />;
             case 'Account':

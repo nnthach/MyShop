@@ -1,17 +1,42 @@
 import { useContext, useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 import { ProductsContext } from '~/context/ProductsContext';
 
 function FilterMenu({ openFilter, handleOpenFilter, setOpenFilter }) {
     const { sortBy, colors, size, filterData, setFilterData, initialData, handleGetAllProduct } =
         useContext(ProductsContext);
 
+    const navigate = useNavigate();
+
     const handleApplyFilter = (e) => {
         e.preventDefault();
 
-        console.log(filterData);
-        handleGetAllProduct(filterData);
-        setFilterData(initialData);
+        const sortFormat = {
+            'Latest Arrivals': '',
+            'Price - High to Low': 'HighToLow',
+            'Price - Low to High': 'LowToHigh',
+        };
+
+        const formattedFilter = {
+            ...filterData,
+            sortBy: sortFormat[filterData.sortBy] || '',
+            color: filterData.color === '' ? [] : filterData.color,
+        };
+
+        console.log('filter product', formattedFilter);
+
+        const query = new URLSearchParams();
+
+        if (formattedFilter.sortBy) query.set('sortBy', formattedFilter.sortBy);
+        if (formattedFilter.color && formattedFilter.color.length > 0)
+            formattedFilter.color.forEach((c) => query.append('color', c));
+        if (formattedFilter.size && formattedFilter.size.length > 0)
+            formattedFilter.size.forEach((s) => query.append('size', s));
+
+        navigate(`/products/${formattedFilter.type === '' ? 'all' : formattedFilter.type}?${query.toString()}`);
+
+        handleGetAllProduct(formattedFilter);
         handleOpenFilter();
     };
 

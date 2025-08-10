@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import ScrollToTop from '~/components/ScrollToTop/ScrollToTop';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
 import ProtectedRoute from '~/routes/ProtectedRoute';
+import SideBarLeft from '~/components/SideBarLeft/SideBarLeft';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
             <ScrollToTop />
             <ToastContainer />
             <SideBar />
+            <SideBarLeft />
             <Suspense fallback={<LoadingIcon />}>
                 <Routes>
                     {publicRoutes.map((route, index) => {

@@ -3,13 +3,14 @@ import { TbEaseInOutControlPoints } from 'react-icons/tb';
 import { useContext, useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination/Pagination';
 import FilterMenu from './FilterMenu/FilterMenu';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ProductsContext } from '~/context/ProductsContext';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
 import ProductCard from '~/components/ProductCard/ProductCard';
 
 function Product() {
     const [currentPage, setCurrentPage] = useState(1);
+    const { type } = useParams();
     const [isSticky, setIsSticky] = useState(false);
     const [openFilter, setOpenFilter] = useState(false);
     const productsPerPage = 16;
@@ -18,10 +19,32 @@ function Product() {
 
     const navigate = useNavigate();
 
+    const [searchParams] = useSearchParams();
+
+    const sortByParam = searchParams.get('sortBy') || '';
+    const colors = searchParams.getAll('color').filter((c) => c.trim() !== '');
+    const sizes = searchParams.getAll('size').filter((s) => s.trim() !== '');
+
+    useEffect(() => {
+        console.log('get all product 2');
+
+        const newFilter = {
+            ...filterData,
+            type: type === 'all' ? '' : type,
+            sortBy: sortByParam,
+            color: colors,
+            size: sizes,
+        };
+
+        setFilterData(newFilter);
+        handleGetAllProduct(newFilter);
+    }, [type, sortByParam]);
+
     const handleOpenFilter = () => {
         setOpenFilter((openFilter) => !openFilter);
     };
 
+    // clear filter btn
     const handleClearFilter = (e) => {
         e.preventDefault();
 
@@ -30,6 +53,7 @@ function Product() {
         handleGetAllProduct(filterData);
     };
 
+    // open sidebar filter
     useEffect(() => {
         if (openFilter) {
             document.body.style.overflow = 'hidden';
@@ -42,14 +66,14 @@ function Product() {
         };
     }, [openFilter]);
 
+    // sticky header
     useEffect(() => {
-        const bannerHeight = document.querySelector('.banner').offsetHeight;
+        const bannerElement = document.querySelector('.banner');
+        if (!bannerElement) return;
+
+        const bannerHeight = bannerElement.offsetHeight;
         const handleScroll = () => {
-            if (window.scrollY >= bannerHeight) {
-                setIsSticky(true);
-            } else {
-                setIsSticky(false);
-            }
+            setIsSticky(window.scrollY >= bannerHeight);
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -86,7 +110,10 @@ function Product() {
                 >
                     <div className="flex justify-between items-center text-[14px] sm:text-[20px]">
                         <p>
-                            <span className='cursor-pointer text-gray-400' onClick={() => navigate('/')}>Home</span> / All Products
+                            <span className="cursor-pointer text-gray-400" onClick={() => navigate('/')}>
+                                Home
+                            </span>{' '}
+                            / Products / {type.charAt(0).toUpperCase() + type.slice(1)}
                         </p>
 
                         <button

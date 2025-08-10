@@ -7,10 +7,10 @@ export const SideBarContext = createContext();
 
 export const SideBarProvider = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isOpenSideBarLeft, setIsOpenSideBarLeft] = useState(false);
     const [type, setType] = useState('');
     const [productCartData, setProductCartData] = useState([]);
     const userId = Cookies.get('userId');
-
     const handleGetCartByUserId = async (userId, type) => {
         if (userId && type === 'Cart') {
             try {
@@ -40,6 +40,27 @@ export const SideBarProvider = ({ children }) => {
         };
     }, [isOpen]);
 
-    const value = { isOpen, setIsOpen, type, setType, handleGetCartByUserId, productCartData };
+    useEffect(() => {
+        if (isOpenSideBarLeft) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [isOpenSideBarLeft]);
+
+    const value = {
+        isOpen,
+        setIsOpen,
+        type,
+        setType,
+        handleGetCartByUserId,
+        productCartData,
+        isOpenSideBarLeft,
+        setIsOpenSideBarLeft,
+    };
     return <SideBarContext.Provider value={value}>{children}</SideBarContext.Provider>;
 };

@@ -10,6 +10,8 @@ export const ProductsProvider = ({ children }) => {
         sortBy: '',
         color: [],
         size: [],
+        type: '',
+        name: '',
     };
     const [filterData, setFilterData] = useState(initialData);
 
@@ -40,18 +42,10 @@ export const ProductsProvider = ({ children }) => {
         setIsLoading(true);
 
         try {
-            const sortFormat = {
-                'Latest Arrivals': '',
-                'Price - High to Low': 'HighToLow',
-                'Price - Low to High': 'LowToHigh',
-            };
+            const res = await getProductListAPI(data);
 
-            const convertData = {
-                ...data,
-                sortBy: sortFormat[data.sortBy] || '',
-            };
+            console.log('get all product res', res);
 
-            const res = await getProductListAPI(convertData);
             setAllProductData(res.data);
         } catch (error) {
             console.log(error);
